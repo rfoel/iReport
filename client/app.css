@@ -1,0 +1,15 @@
+.container-box {
+	padding: 20px 30px 0 30px; 
+	border: 1px solid #EEE;
+}
+
+
+body {
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+}
+
+main {
+	flex: 1 0 auto;
+}
