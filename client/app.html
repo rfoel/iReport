@@ -8,30 +8,30 @@
             <nav>
                 <div class="nav-wrapper container">
                     <a href="/" class="brand-logo">iReport</a>
-                    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                    <a data-activates="mobile-nav" class="button-collapse"><i class="material-icons">menu</i></a>
                     <ul class="right hide-on-med-and-down">
-                        <li><a href="/reports"><i class="material-icons left" aria-hidden="true">description</i></a></li>
-                        <li><a href="/new_report"><i class="material-icons">note_add</i></a></li>
                         {{#if currentUser}}
-                        <li><a class="dropdown-button" href="#!" data-activates="dropdown-profile">@{{currentUser.profile.name}}<i class="material-icons right">arrow_drop_down</i></a></li>
+                        <li class="{{isActiveRoute 'reports'}}"><a href="/reports"><i class="material-icons">description</i></a></li>
+                        <li class="{{isActiveRoute 'new_report'}}"><a href="/new_report"><i class="material-icons">note_add</i></a></li>
+                        <li><a class="dropdown-button" data-activates="dropdown-profile">@{{currentUser.profile.name}}<i class="material-icons right">arrow_drop_down</i></a></li>
                         <ul id='dropdown-profile' class='dropdown-content'>
                             <li><a href="#!">Meu perfil</a></li>
-                            <li><a href="#!">two</a></li>
                             <li class="divider"></li>
                             <li><a href="/logout">Logout</a></li>
                         </ul>
                         {{else}}
-                        <li><a href="/login">Login</a></li>
+                        <li class="{{isActiveRoute 'login'}}"><a href="/login">Login</a></li>
                         {{/if}}
                     </ul>
-                    <ul class="side-nav" id="mobile-demo">
+                    <ul class="side-nav" id="mobile-nav">
                         {{#if currentUser}}
-                        <li><a href="#!">Meu perfil</a></li>
-                        <li><a href="#!">two</a></li>
+                        <li class="{{isActiveRoute 'reports'}}"><a href="/reports">Relatórios</a></li>
+                        <li class="{{isActiveRoute 'new_report'}}"><a href="/new_report">Novo relatório</a></li>
                         <li class="divider"></li>
+                        <li><a href="#!">Meu perfil</a></li>
                         <li><a href="/logout">Logout</a></li>
                         {{else}}
-                        <li><a href="/login">Login</a></li>
+                        <li  class="{{isActiveRoute 'login'}}"><a href="/login">Login</a></li>
                         {{/if}}
                     </ul>
                 </div>
@@ -185,4 +185,8 @@
             </tr>
         </tbody>
     </table>
+</template>
+
+<template name="new_report">
+    <h1>Nothing</h1>
 </template>

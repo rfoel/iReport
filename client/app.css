@@ -33,3 +33,11 @@ main {
 *:focus {
     outline: none;
 }
+
+nav li.active {
+	line-height: 100%;
+}
+
+nav li.active a {
+	line-height: 64px;
+}
