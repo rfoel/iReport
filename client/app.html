@@ -25,10 +25,11 @@
                         {{/if}}
                     </ul>
                     <ul class="side-nav" id="mobile-demo">
-                        <li><a href="#">Sass</a></li>
-                        <li><a href="#">Components</a></li>
                         {{#if currentUser}}
-                        <li><a href="#">Meu perfil</a></li>
+                        <li><a href="#!">Meu perfil</a></li>
+                        <li><a href="#!">two</a></li>
+                        <li class="divider"></li>
+                        <li><a href="/logout">Logout</a></li>
                         {{else}}
                         <li><a href="/login">Login</a></li>
                         {{/if}}
@@ -40,7 +41,6 @@
         <main class="container">
             {{>Template.dynamic template=content}}
         </main>
-
 
         <footer class="page-footer">
             <div class="container">
@@ -62,8 +62,9 @@
             </div>
             <div class="footer-copyright">
                 <div class="container">
-                    © 2014 Copyright Text
-                    <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+                    © 2016 Rafael Franco
+                    <a class="grey-text text-lighten-4 right" href="https://gitlab.com/u/rfoel"><i class="fa fa-gitlab fa-2x" aria-hidden="true"></i></a>
+                    <a class="grey-text text-lighten-4 right" href="https://github.com/rfoel"><i class="fa fa-github fa-2x" aria-hidden="true"></i></a>
                 </div>
             </div>
         </footer>
@@ -81,7 +82,7 @@
 </template>
 
 <template name="login">
-<div class="row center-align">
+    <div class="row center-align">
         <div class="col s12 m4 offset-m1">
             <div class="row">
                 <h5 class="">Já possui cadastro? Faça login.</h5>
@@ -90,19 +91,19 @@
                 <form id="login-form" action="action">
                     <div class="row left-align">                    
                         <div class="input-field col s12">
-                            <input id="login-email" type="email" class="validate">
-                            <label for="email">Email</label>
+                            <input id="login_email" name="login_email" type="email" required>
+                            <label for="login_email">Email</label>
                         </div>
                     </div>
                     <div class="row left-align">
                         <div class="input-field col s12">
-                            <input id="login-password" type="password" class="validate">
-                            <label for="password">Senha</label>
+                            <input id="login_password" name="login_password" type="password" required>
+                            <label for="login_password">Senha</label>
                         </div>
                     </div>
                     <div class="row right-align">
                         <label>
-                            <a class='pink-text' href='#!'><b>Esqueceu a senha?</b></a>
+                            <a class='pink-text' href='#!'>Esqueceu a senha?</a>
                         </label>
                     </div>
                     <div class="row">
@@ -119,26 +120,32 @@
                 <form id="register-form" action="action">
                     <div class="row left-align">                    
                         <div class="input-field col s12">
-                            <input id="account-name" type="text">
-                            <label for="account-name">Nome</label>
+                            <label for="name">Nome</label>
+                            <input id="name" name="name" type="text" required>
                         </div>
                     </div>
                     <div class="row left-align">                    
                         <div class="input-field col s12">
-                            <input id="account-surname" type="text">
+                            <input id="surname" name="surname" type="text" required>
                             <label for="account-surname">Sobrenome</label>
                         </div>
                     </div>
                     <div class="row left-align">                    
                         <div class="input-field col s12">
-                            <input id="account-email" type="email" class="validate">
+                            <input id="email" name="email" type="email" required>
                             <label for="email">Email</label>
                         </div>
                     </div>
                     <div class="row left-align">
                         <div class="input-field col s12">
-                            <input id="account-password" type="password" class="validate">
+                            <input id="password" name="password" type="password" required>
                             <label for="password">Senha</label>
+                        </div>
+                    </div>
+                    <div class="row left-align">
+                        <div class="input-field col s12">
+                            <input id="confirm_password" name="confirm_password" type="password" required>
+                            <label for="confirm_password">Confirmar senha</label>
                         </div>
                     </div>
                     <div class="row">
@@ -148,4 +155,34 @@
             </div>
         </div>
     </div>
+</template>
+
+<template name="reports">
+    <table class="highlight bordered">
+        <thead>
+            <tr>
+                <th data-field="id">Name</th>
+                <th data-field="name">Item Name</th>
+                <th data-field="price">Item Price</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>Alvin</td>
+                <td>Eclair</td>
+                <td>$0.87</td>
+            </tr>
+            <tr>
+                <td>Alan</td>
+                <td>Jellybean</td>
+                <td>$3.76</td>
+            </tr>
+            <tr>
+                <td>Jonathan</td>
+                <td>Lollipop</td>
+                <td>$7.00</td>
+            </tr>
+        </tbody>
+    </table>
 </template>

@@ -17,3 +17,9 @@ FlowRouter.route('/logout', {
 		Materialize.toast('Até logo!', 4000, 'green');
 	}
 });
+
+FlowRouter.route('/reports', {
+	action: function() {
+		BlazeLayout.render("mainLayout", {content: "reports"});
+	}
+});
