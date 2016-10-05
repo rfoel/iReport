@@ -1,0 +1,133 @@
+<template name="category">
+    <nav class="z-depth-0 transparent black-text">
+        <div class="nav-wrapper">
+            <div class="col s12">
+                <a href="/" class="breadcrumb">Home</a>
+                <a href="/category" class="breadcrumb">Categorias</a>
+            </div>
+        </div>
+    </nav>
+    <div class="col s12">
+        <div class="row">
+            <h5 class="left">Categorias</h5>
+            {{> category_options}}
+        </div>
+        <div class="row">
+            {{#if category.count}}
+            {{#each category}}
+            {{> category_item}}
+            {{/each}}
+            {{else}}
+            <h5>As categorias criadas aparecerão aqui!</h5>
+            {{/if}}
+        </div>
+    </div>
+</template>
+
+<template name="category_deleted">
+    <nav class="z-depth-0 transparent black-text">
+        <div class="nav-wrapper">
+            <div class="col s12">
+                <a href="/" class="breadcrumb">Home</a>
+                <a href="/category" class="breadcrumb">Categorias</a>
+                <a href="/category/deleted" class="breadcrumb">Categorias removidas</a>
+            </div>
+        </div>
+    </nav>
+    <div class="col s12">
+        <div class="row">
+            <h5 class="left">Categorias removidas</h5>
+            {{> category_options}}
+        </div>
+        <div class="row">
+            {{#if category.count}}
+            {{#each category}}
+            {{> category_item}}
+            {{/each}}
+            {{else}}
+            <h5>As categorias removidas aparecerão aqui!</h5>
+            {{/if}}
+        </div>
+    </div>
+</template>
+
+<template name="category_item">
+    <div id="{{_id}}" class="col s12 m6 l4">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4 truncate">
+                    <div class="col s10">
+                        <span class="truncate">{{title}}</span>
+                    </div>
+                    <div class="col s2">
+                        <i class="material-icons right">more_vert</i>
+                    </div>
+                </span>
+            </div>
+            <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">
+                    <div class="row">
+                    <div class="col s12">
+
+                        <i class="material-icons right">close</i><i id="edit" class="material-icons right">edit</i><i id="delete" class="material-icons right">delete</i><i id="restore" class="material-icons right">loop</i>
+                        </div>
+                    </div>
+                    <div class="row">
+                        {{title}}
+                    </div>
+                </span>
+                <div class="row">
+                    <p class="model">{{model}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="new_category">
+    <nav class="z-depth-0 transparent black-text">
+        <div class="nav-wrapper">
+            <div class="col s12">
+                <a href="/" class="breadcrumb">Home</a>
+                <a href="/category" class="breadcrumb">Categorias</a>
+                <a href="/category/new" class="breadcrumb">Nova categoria</a>
+            </div>
+        </div>
+    </nav>
+    <div class="col s12 m12">
+        <div class="row">
+            <h5 class="left">Nova categoria</h5>
+            {{> category_options}}
+        </div>
+        <form id="new-category" action="/category/new" method="post">
+            <div class="row">                    
+                <div class="input-field col s12 m6">
+                    <input id="title" name="title" type="text" required>
+                    <label for="title">Título</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12 m6">
+                    <textarea id="model" class="materialize-textarea"></textarea>
+                    <label for="model">Modelo</label>
+                </div>
+            </div>
+            <div class="row">
+                <button id="btn-submit" class="btn waves-effect" type="submit" name="action">Enviar</button>
+            </div>
+        </form> 
+    </div>
+</template>
+
+<template name="category_options">
+    <div style="position: relative;">
+        <div class="fixed-action-btn horizontal click-to-toggle" style="position: absolute; display: inline-block; top: -10px">
+            <a class="btn-floating btn-large waves-effect"><i class="large material-icons">more_vert</i></a>
+            <ul>
+                <li><a id="category" href="/category" class="btn-floating tooltipped light-blue darken-4" data-tooltip="Visualizar categorias"><i class="material-icons">reorder</i></a></li>
+                <li><a id="deleted" href="/category/deleted" class="btn-floating tooltipped red" data-tooltip="Visualizar categorias deletadas"><i class="material-icons">delete</i></a></li>
+                <li><a id="add" href="/category/new" class="btn-floating tooltipped green" data-tooltip="Adicionar nova categoria"><i class="material-icons">add</i></a></li>
+            </ul>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,77 @@
+<head>
+    <title>iReport</title>
+    <link rel="icon" sizes="16x16 32x32" href="/favicon.ico?v=2">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+</head>
+
+<template name="mainLayout">
+    <body>
+        <header>
+            {{>Template.dynamic template=header}}
+        </header>
+
+        <main class="container">
+            {{>Template.dynamic template=main}}
+        </main>
+
+        <footer class="page-footer transparent">
+            {{>Template.dynamic template=footer}}
+        </footer>
+
+        {{> sAlert}}
+    </body>
+</template>
+
+<template name="nav">
+    <nav>
+        <div class="nav-wrapper container">
+            <a href="/" class="brand-logo">iReport</a>
+            <a data-activates="mobile-nav" class="button-collapse"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+                {{#if currentUser}}
+                {{> dropdown_profile}}
+                {{else}}
+                <li class="{{isActiveRoute 'login'}}"><a href="/login">Login</a></li>
+                {{/if}}
+            </ul>
+            <ul id="dropdown-profile" class="dropdown-content"> 
+                <li><a href="/user">Meu perfil</a></li>
+                <li><a href="/category">Categorias</a></li>
+                <li class="divider"></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+            <ul class="side-nav" id="mobile-nav">
+                {{#if currentUser}}
+                <li class="{{isActiveRoute 'report'}}"><a href="/report">Relatórios</a></li>
+                <li class="{{isActiveRoute 'new_report'}}"><a href="/report/new">Novo relatório</a></li>
+                <li class="divider"></li>
+                <li><a href="/user">Meu perfil</a></li>
+                <li><a href="/category">Categorias</a></li>
+                <li><a href="/logout">Logout</a></li>
+                {{else}}
+                <li  class="{{isActiveRoute 'login'}}"><a href="/login">Login</a></li>
+                {{/if}}
+            </ul>
+        </div>
+    </nav>
+</template>
+
+<template name="dropdown_profile">
+    <li class="{{isActiveRoute 'report'}}"><a href="/report"><i class="material-icons">description</i></a></li>
+    <li class="{{isActiveRoute 'new_report'}}"><a href="/report/new"><i class="material-icons">note_add</i></a></li>
+    <li><a class="dropdown-button" data-activates="dropdown-profile">@{{currentUser.profile.name}}<i class="material-icons right">arrow_drop_down</i></a></li>
+</template>
+
+<template name="footer">
+    <div class="footer-copyright light-blue darken-4">
+        <div class="container">
+            © 2016 Rafael Franco
+            <a class="grey-text text-lighten-4 right tooltipped" href="https://gitlab.com/u/rfoel" data-position="top" data-tooltip="GitLab"><i class="fa fa-gitlab fa-2x" aria-hidden="true"></i></a>
+            <a class="grey-text text-lighten-4 right tooltipped" href="https://github.com/rfoel" data-position="top" data-tooltip="GitHub"><i class="fa fa-github fa-2x" aria-hidden="true"></i></a>
+        </div>
+    </div>
+</template>
+
+<template name="home">
+    <p>This is the home page of our blog</p>
+</template>

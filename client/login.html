@@ -1,0 +1,150 @@
+<template name="user">
+    <h1>User</h1>
+</template>
+
+<template name="login">
+    <nav class="z-depth-0 transparent black-text">
+        <div class="nav-wrapper">
+            <div class="col s12">
+                <a href="/" class="breadcrumb">Home</a>
+                <a href="/login" class="breadcrumb">Login</a>
+            </div>
+        </div>
+    </nav>
+    <div class="row center-align">
+        <div class="col s12 m4 offset-m1">
+            <div class="row">
+                <h5>Já possui cadastro? Faça login.</h5>
+            </div>
+            <form id="login-form" action="action">
+                <div class="row left-align">                    
+                    <div class="input-field col s12">
+                        <input id="login_email" name="login_email" type="email" required>
+                        <label for="login_email">Email</label>
+                    </div>
+                </div>
+                <div class="row left-align">
+                    <div class="input-field col s12">
+                        <input id="login_password" name="login_password" type="password" required>
+                        <label for="login_password">Senha</label>
+                    </div>
+                </div>
+                <div class="row right-align">
+                    <label>
+                        <a class='pink-text' href='/ForgotPassword'>Esqueceu a senha?</a>
+                    </label>
+                </div>
+                <div class="row">
+                    <button id="login-button" class="btn waves-effect" type="submit" name="action">Entrar</button>
+                </div>
+            </form> 
+        </div>
+        <div class="col s12 m4 offset-m2">
+            <div class="row">
+                <h5>Não possui cadastro? Cadastre-se.</h5>
+            </div>
+            <form id="register-form" action="action">
+                <div class="row left-align">                    
+                    <div class="input-field col s12">
+                        <label for="name">Nome</label>
+                        <input id="name" name="name" type="text" required>
+                    </div>
+                </div>
+                <div class="row left-align">                    
+                    <div class="input-field col s12">
+                        <input id="surname" name="surname" type="text" required>
+                        <label for="account-surname">Sobrenome</label>
+                    </div>
+                </div>
+                <div class="row left-align">                    
+                    <div class="input-field col s12">
+                        <input id="email" name="email" type="email" required>
+                        <label for="email">Email</label>
+                    </div>
+                </div>
+                <div class="row left-align">
+                    <div class="input-field col s12">
+                        <input id="password" name="password" type="password" required>
+                        <label for="password">Senha</label>
+                    </div>
+                </div>
+                <div class="row left-align">
+                    <div class="input-field col s12">
+                        <input id="confirm_password" name="confirm_password" type="password" required>
+                        <label for="confirm_password">Confirmar senha</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <button id="create-account" class="btn waves-effect" type="submit" name="action">Registrar</button>
+                </div>
+            </form> 
+        </div>
+    </div>
+</template>
+
+<template name="ForgotPassword">
+    <nav class="z-depth-0 transparent black-text">
+        <div class="nav-wrapper">
+            <div class="col s12">
+                <a href="/" class="breadcrumb">Home</a>
+                <a href="/login" class="breadcrumb">Login</a>
+                <a href="/ForgotPassword" class="breadcrumb">Esqueci a senha</a>
+            </div>
+        </div>
+    </nav>
+    <div class="row center-align">
+        <div class="col s12 m4 offset-m4">
+            <div class="row">
+                <h5>Informe o seu email para a recuperação da senha.</h5>
+            </div>
+            <form id="forgot-form" action="/forgot" method="post">
+                <div class="row left-align">                    
+                    <div class="input-field col s12">
+                        <input id="forgot_email" name="forgot_email" type="email" required>
+                        <label for="forgot_email">Email</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <button id="btn-submit" class="btn waves-effect" type="submit" name="action">Enviar</button>
+                </div>
+            </form> 
+        </div>
+    </div>
+</template>
+
+<template name="ResetPassword">
+    {{#if resetPassword}}
+    <nav class="z-depth-0 transparent black-text">
+        <div class="nav-wrapper">
+            <div class="col s12">
+                <a href="/" class="breadcrumb">Home</a>
+                <a href="/login" class="breadcrumb">Login</a>
+                <a href="/ForgotPassword" class="breadcrumb">Esqueci a senha</a>
+                <a href="/reset-password" class="breadcrumb">Nova senha</a>
+            </div>
+        </div>
+    </nav>
+    <div class="row center-align">
+        <div class="col s12 m4 offset-m4">
+            <div class="row">
+                <h5>Crie uma nova senha.</h5>
+            </div>
+            <form id="reset-form" action="/reset-password" method="post">
+                <div class="row left-align">                    
+                    <div class="input-field col s12">
+                        <input id="password" name="password" type="password" value="" required>
+                        <label for="password">Nova senha</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <input id="confirm_password" name="confirm_password" type="password" value="" required>
+                        <label for="confirm_password">Confirmar nova senha</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <button id="btn-submit" class="btn waves-effect" type="submit" name="action">Enviar</button>
+                </div>
+            </form> 
+        </div>
+    </div>
+    {{/if}}
+</template>

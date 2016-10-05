@@ -79,3 +79,7 @@ nav li.active a {
 #restore:hover, #restore:focus {
 	color: #00c853;
 }
+
+footer .page-footer {
+	background: transparent;
+}
