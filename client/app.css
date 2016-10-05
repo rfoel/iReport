@@ -31,7 +31,7 @@ main {
 }
 
 *:focus {
-    outline: none;
+	outline: none;
 }
 
 nav li.active {
@@ -40,4 +40,42 @@ nav li.active {
 
 nav li.active a {
 	line-height: 64px;
+}
+
+.breadcrumb {
+	color: #777 !important;
+}
+
+.breadcrumb:before {
+	color: #777 !important;
+}
+
+.breadcrumb:last-child {
+	color: #333 !important;
+}
+
+@media (max-width: 768px) {
+	.breadcrumb:not(:first-child):not(:last-child) {
+		display: none;
+	}
+}
+
+.button-collapse {
+	cursor: pointer;
+}
+
+.model {
+	white-space: pre-line;
+}
+
+#delete:hover, #delete:focus {
+	color: #f50057;
+}
+
+#edit:hover, #edit:focus {
+	color: #01579b;
+}
+
+#restore:hover, #restore:focus {
+	color: #00c853;
 }
