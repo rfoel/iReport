@@ -128,16 +128,14 @@ Template.edit_category.events({
 
 		return false;
 	},
-	'change #model' : function() {
+	'focus #model' : function(){
 		$('#model').trigger('autoresize');
-		$('#model').focusin().focusout();
 	}
 });
 
 Template.edit_category.helpers({
 	category:function () {
 		var id = Session.get('categoryId');
-
 		return Category.findOne({_id:id});
 	}
 });
@@ -147,6 +145,5 @@ Template.edit_category.onCreated(function() {
 	self.autorun(function() {
 		var id = FlowRouter.getParam('categoryId');
 		Session.set('categoryId', id);
-    // self.subscribe('singlePost', postId);  
-});
+	});
 });

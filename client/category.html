@@ -18,8 +18,8 @@
             {{> category_item}}
             {{/each}}
             {{else}}
-            <h5>As categorias criadas aparecerão aqui!</h5>
-            {{/if}}
+            <h4 class="center-align grey-text">Você não tem categorias :(</h4>
+            {{/if}} 
         </div>
     </div>
 </template>
@@ -45,7 +45,7 @@
             {{> category_item}}
             {{/each}}
             {{else}}
-            <h5>As categorias removidas aparecerão aqui!</h5>
+            <h5>Você não tem categorias removidas.</h5>
             {{/if}}
         </div>
     </div>
@@ -68,7 +68,7 @@
                 <span class="card-title grey-text text-darken-4">
                     <div class="row">
                         <div class="col s12">
-                            <i class="material-icons right">close</i><i id="edit" class="material-icons right">edit</i><i id="delete" class="material-icons right">delete</i><i id="restore" class="material-icons right">loop</i>
+                            <i class="material-icons right">close</i><i id="edit" class="material-icons right">edit</i><i id="delete" class="material-icons right">delete</i><i id="restore" class="material-icons right">restore</i>
                         </div>
                     </div>
                     <div class="row">
@@ -126,7 +126,7 @@
             <div class="col s12">
                 <a href="/" class="breadcrumb">Home</a>
                 <a href="/category" class="breadcrumb">Categorias</a>
-                <a href="/category/edit/" class="breadcrumb">Editar categoria</a>
+                <a href="/category/edit/{{category._id}}" class="breadcrumb">Editar categoria</a>
             </div>
         </div>
     </nav>

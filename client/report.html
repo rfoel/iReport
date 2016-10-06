@@ -7,36 +7,94 @@
             </div>
         </div>
     </nav>
+    {{> report_options}}
     <div class="row">
         <h5>Relatórios</h5>
     </div>
     <table class="highlight bordered">
+        {{#if report.count}}
         <thead>
             <tr>
-                <th data-field="id">Name</th>
-                <th data-field="name">Item Name</th>
-                <th data-field="price">Item Price</th>
+                <th>Nome</th>
+                <th>Hora/Data</th>
+                <th>Categoria</th>
+                <th>Ações</th>
             </tr>
         </thead>
 
         <tbody>
-            <tr>
-                <td>Alvin</td>
-                <td>Eclair</td>
-                <td>$0.87</td>
-            </tr>
-            <tr>
-                <td>Alan</td>
-                <td>Jellybean</td>
-                <td>$3.76</td>
-            </tr>
-            <tr>
-                <td>Jonathan</td>
-                <td>Lollipop</td>
-                <td>$7.00</td>
-            </tr>
+            {{#each report}}
+            {{> report_item}}
+            {{/each}}
         </tbody>
+        {{else}}
+        <h4 class="center-align grey-text">Você não tem relatórios :(</h4>
+        {{/if}}  
     </table>
+</template>
+
+<template name="report_deleted">
+    <nav class="z-depth-0 transparent black-text">
+        <div class="nav-wrapper">
+            <div class="col s12">
+                <a href="/" class="breadcrumb">Home</a>
+                <a href="/report" class="breadcrumb">Relatórios</a>
+                <a href="/report/deleted" class="breadcrumb">Relatórios removidos</a>
+            </div>
+        </div>
+    </nav>
+    {{> report_options}}
+    <div class="row">
+        <h5>Relatórios removidos</h5>
+    </div>
+    <table class="highlight bordered">
+        {{#if report.count}}
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Hora/Data</th>
+                <th>Categoria</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {{#each report}}
+            {{> report_item}}
+            {{/each}}
+        </tbody>
+        {{else}}
+        <h4 class="center-align grey-text">Você não tem relatórios removidos.</h4>
+        {{/if}}  
+    </table>
+</template>
+
+<template name="report_item">
+    <tr id="{{_id}}">
+        <td>{{name}}</td>
+        <td>{{datetime}}</td>
+        <td>{{getCategory category}}</td>
+        <td class="actions">{{> report_actions}}</td>
+    </tr>
+</template>
+
+<template name="report_actions">
+    <div class="right">
+        <i id="view" class="material-icons tooltipped" data-tooltip="Visualizar relatório">visibility</i><i id="edit" class="material-icons tooltipped" data-tooltip="Editar relatório">edit</i><i id="restore" class="material-icons tooltipped" data-tooltip="Restaurar relatório">restore</i><i id="delete" class="material-icons tooltipped" data-tooltip="Apagar relatório">delete</i>
+    </div>
+</template>
+
+<template name="report_options">
+    <div style="position: relative;  top: 22px">
+        <div class="fixed-action-btn horizontal click-to-toggle" style="position: absolute; display: inline-block;">
+            <a class="btn-floating btn-large waves-effect"><i class="large material-icons">more_vert</i></a>
+            <ul>
+                <li><a id="report" href="/report" class="btn-floating tooltipped light-blue darken-4" data-tooltip="Visualizar relatórios"><i class="material-icons">reorder</i></a></li>
+                <li><a id="deleted" href="/report/deleted" class="btn-floating tooltipped red" data-tooltip="Visualizar relatórios deletados"><i class="material-icons">delete</i></a></li>
+                <li><a id="add" href="/report/new" class="btn-floating tooltipped green" data-tooltip="Criar novo relatório"><i class="material-icons">add</i></a></li>
+            </ul>
+        </div>
+    </div>
 </template>
 
 <template name="new_report">
@@ -49,14 +107,15 @@
             </div>
         </div>
     </nav>
+    {{> report_options}}
     <div class="col s12 m12">
         <div class="row">
             <h5>Novo relatório</h5>
         </div>
-        <form id="new_report" action="/report/new" method="post">
+        <form id="new-report" action="/report/new" method="post">
             <div class="row">                    
                 <div class="input-field col s12 m6 l4">
-                    <input id="name" name="name" type="email" required>
+                    <input id="name" name="name" type="text" required>
                     <label for="name">Nome do cliente ou empresa</label>
                 </div>
                 <div class="input-field col s12 m6 l4">
@@ -89,6 +148,125 @@
             </div>
             <div class="row">
                 <button id="btn-submit" class="btn waves-effect" type="submit" name="action">Enviar</button>
+            </div>
+        </form> 
+    </div>
+</template>
+
+<template name="edit_report">
+    <nav class="z-depth-0 transparent black-text">
+        <div class="nav-wrapper">
+            <div class="col s12">
+                <a href="/" class="breadcrumb">Home</a>
+                <a href="/report" class="breadcrumb">Relatórios</a>
+                <a href="/report/edit/{{report._id}}" class="breadcrumb">Editar relatório</a>
+            </div>
+        </div>
+    </nav>
+    {{> report_options}}
+    <div class="col s12 m12">
+        <div class="row">
+            <h5>Novo relatório</h5>
+        </div>
+        <form id="edit-report" action="/report/edit" method="post">
+            <div class="row">                    
+                <div class="input-field col s12 m6 l4">
+                    <input id="name" name="name" type="text" value="{{report.name}}" required>
+                    <label class="active" for="name">Nome do cliente ou empresa</label>
+                </div>
+                <div class="input-field col s12 m6 l4">
+                    <input id="date" name="date" type="text" value="{{report.datetime}}" readonly>
+                    <label class="active" for="date">Hora/data</label>
+                </div>
+                <div class="input-field col s12 m6 l4">
+                    <select id="category">
+                        {{#if category.count}}
+                        <option value="" disabled>Escolha uma categoria</option>
+                        {{#each category}}
+                        {{#if equals _id report.category}}
+                        <option value="{{_id}}" selected>{{title}}</option>
+                        {{else}}
+                        <option value="{{_id}}">{{title}}</option>
+                        {{/if}}
+                        {{/each}}
+                        {{else}}
+                        <option value="" disabled selected>Não existem categorias</option>
+                        {{/if}}
+                    </select>
+                    <label>Categoria</label>
+                </div>
+            </div>
+            <div class="row">
+                <form class="col s12">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea id="description" class="materialize-textarea">{{report.description}}</textarea>
+                            <label  class="active" id="label_description" for="description">Descrição</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="row">
+                <button id="btn-submit" class="btn waves-effect" type="submit" name="action">Enviar</button>
+            </div>
+        </form> 
+    </div>
+</template>
+
+<template name="view_report">
+    <nav class="z-depth-0 transparent black-text">
+        <div class="nav-wrapper">
+            <div class="col s12">
+                <a href="/" class="breadcrumb">Home</a>
+                <a href="/report" class="breadcrumb">Relatórios</a>
+                <a href="/report/edit/{{report._id}}" class="breadcrumb">Visualizar relatório</a>
+            </div>
+        </div>
+    </nav>
+    {{> report_options}}
+    <div class="col s12 m12">
+        <div class="row">
+            <h5>Visualizar relatório</h5>
+        </div>
+        <form id="view-report" action="/report/edit" method="post">
+            <div class="row">                    
+                <div class="input-field col s12 m6 l4">
+                    <input disabled id="name" name="name" type="text" value="{{report.name}}" required>
+                    <label class="active" for="name">Nome do cliente ou empresa</label>
+                </div>
+                <div class="input-field col s12 m6 l4">
+                    <input id="date" name="date" type="text" value="{{report.datetime}}" disabled>
+                    <label class="active" for="date">Hora/data</label>
+                </div>
+                <div class="input-field col s12 m6 l4">
+                    <select id="category" disabled>
+                        {{#each category}}
+                        {{#if equals _id report.category}}
+                        <option value="{{_id}}" selected>{{title}}</option>
+                        {{else}}
+                        <option value="{{_id}}">{{title}}</option>
+                        {{/if}}
+                        {{/each}}
+                    </select>
+                    <label>Categoria</label>
+                </div>
+            </div>
+            <div class="row">
+                <form class="col s12">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea disabled id="description" class="materialize-textarea">{{report.description}}</textarea>
+                            <label  class="active" id="label_description" for="description">Descrição</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="row">
+                <button id="back" class="btn waves-effect">Voltar</button>
+                <div style="margin-right: 36px;">
+                    <button id="edit" class="btn-floating btn-large waves-effect green accent-4" style="float: right; margin-left: 10px; bottom: 46px"><i class="material-icons">edit</i></button>
+                    <button id="delete" class="btn-floating btn-large waves-effect pink accent-3" style="float: right; margin-left: 10px; bottom: 46px"><i class="material-icons">delete</i></button>
+                </div>
             </div>
         </form> 
     </div>

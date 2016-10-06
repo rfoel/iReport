@@ -14,3 +14,10 @@ Template.dropdown_profile.onRendered(function() {
 		belowOrigin: true,
 	});
 });
+
+Template.mainLayout.onRendered(function() {
+	$('.tooltipped').tooltip({
+		delay: 50,
+		position: 'top'
+	});
+});

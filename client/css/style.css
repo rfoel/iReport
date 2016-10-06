@@ -80,6 +80,16 @@ nav li.active a {
 	color: #00c853;
 }
 
+#view:hover, #view:focus {
+	color: #64b5f6;
+}
+
 footer .page-footer {
 	background: transparent;
+}
+
+.actions {
+	cursor: pointer;
+	width:1%;
+	white-space:nowrap;
 }

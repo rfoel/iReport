@@ -98,6 +98,31 @@ FlowRouter.route('/report/new', {
 	}
 });
 
+FlowRouter.route('/report/edit/:reportId', {
+	name: 'edit_report',
+	triggersEnter: [checkLoggedIn],
+	action: function() {
+		BlazeLayout.render("mainLayout", {header: "nav", main: "edit_report", footer: "footer"});
+	}
+});
+
+FlowRouter.route('/report/:reportId', {
+	name: 'view_report',
+	triggersEnter: [checkLoggedIn],
+	action: function() {
+		BlazeLayout.render("mainLayout", {header: "nav", main: "view_report", footer: "footer"});
+	}
+});
+
+
+FlowRouter.route('/report/deleted', {
+	name: 'report_deleted',
+	triggersEnter: [checkLoggedIn],
+	action: function() {
+		BlazeLayout.render("mainLayout", {header: "nav", main: "report_deleted", footer: "footer"});
+	}
+});
+
 ActiveRoute.configure({
 	activeClass: 'active',
 	caseSensitive: false,

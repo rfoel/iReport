@@ -1,4 +1,15 @@
 Meteor.methods({
+	'user.update' (user_id, name, surname, email) {
+		if (!this.userId) {
+			throw new Meteor.Error('not-authorized');
+		}
+		Meteor.users.update({_id: user_id}, 
+			{$set: { 
+				profile: { name: name, surname: surname },
+				emails: [{ address: email }]
+			},
+		});
+	},
 	'category.insert'(title, model) {
 		if (!this.userId) {
 			throw new Meteor.Error('not-authorized');
@@ -39,15 +50,51 @@ Meteor.methods({
 		}
 		Category.remove(category_id);
 	},
-	'user.update' (user_id, name, surname, email) {
+	'report.insert'(name, description, category, datetime, createOn) {
 		if (!this.userId) {
 			throw new Meteor.Error('not-authorized');
 		}
-		Meteor.users.update({_id: user_id}, 
-			{$set: { 
-				profile: { name: name, surname: surname },
-				emails: [{ address: email }]
+		var report = Report.insert({
+			name:name,
+			description:description,
+			category:category,
+			datetime:datetime,
+			deleted:false,
+			createOn:createOn,
+			createdBy:this.userId
+		});
+
+		return report;
+	},
+	'report.update'(report_id, name, description, category, updatedAt) {
+		if (!this.userId) {
+			throw new Meteor.Error('not-authorized');
+		}
+		Report.update({_id: report_id},
+			{$set: {
+				name:name,
+				description:description,
+				category:category,
+				updatedAt:updatedAt
 			},
 		});
-	}
+	},
+	'report.softRemove'(report_id) {
+		if (!this.userId) {
+			throw new Meteor.Error('not-authorized');
+		}
+		Report.update(report_id, {$set:{deleted:true}});
+	},
+	'report.restore'(report_id) {
+		if (!this.userId) {
+			throw new Meteor.Error('not-authorized');
+		}
+		Report.update(report_id, {$set:{deleted:false}});
+	},
+	'report.remove'(report_id) {
+		if (!this.userId) {
+			throw new Meteor.Error('not-authorized');
+		}
+		Report.remove(report_id);
+	},
 });
