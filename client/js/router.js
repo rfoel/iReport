@@ -1,4 +1,8 @@
-import { Session } from 'meteor/session'
+function checkLoggedIn (ctx, redirect) {  
+	if (!Meteor.userId()) {
+		redirect('/login')
+	}
+}
 
 FlowRouter.route('/', {
 	name: 'home',
@@ -16,6 +20,7 @@ FlowRouter.route('/login', {
 
 FlowRouter.route('/user', {
 	name: 'user',
+	triggersEnter: [checkLoggedIn],
 	action: function() {
 		BlazeLayout.render("mainLayout", {header: "nav", main: "user", footer: "footer"});
 	}
@@ -23,6 +28,7 @@ FlowRouter.route('/user', {
 
 FlowRouter.route('/category', {
 	name: 'category',
+	triggersEnter: [checkLoggedIn],
 	action: function() {
 		BlazeLayout.render("mainLayout", {header: "nav", main: "category", footer: "footer"});
 	}
@@ -30,19 +36,29 @@ FlowRouter.route('/category', {
 
 FlowRouter.route('/category/new', {
 	name: 'new_category',
+	triggersEnter: [checkLoggedIn],
 	action: function() {
 		BlazeLayout.render("mainLayout", {header: "nav", main: "new_category", footer: "footer"});
 	}
 });
 
+FlowRouter.route('/category/edit/:categoryId', {
+	name: 'edit_category',
+	triggersEnter: [checkLoggedIn],
+	action: function(params) {
+		BlazeLayout.render("mainLayout", {header: "nav", main: "edit_category", footer: "footer"});
+	}
+});
+
 FlowRouter.route('/category/deleted', {
 	name: 'category_deleted',
+	triggersEnter: [checkLoggedIn],
 	action: function() {
 		BlazeLayout.render("mainLayout", {header: "nav", main: "category_deleted", footer: "footer"});
 	}
 });
 
-FlowRouter.route('/ForgotPassword', {
+FlowRouter.route('/forgot-password', {
 	name: 'ForgotPassword',
 	action: function() {
 		BlazeLayout.render("mainLayout", {header: "nav", main: "ForgotPassword", footer: "footer"});
@@ -68,6 +84,7 @@ FlowRouter.route('/logout', {
 
 FlowRouter.route('/report', {
 	name: 'report',
+	triggersEnter: [checkLoggedIn],
 	action: function() {
 		BlazeLayout.render("mainLayout", {header: "nav", main: "report", footer: "footer"});
 	}
@@ -75,6 +92,7 @@ FlowRouter.route('/report', {
 
 FlowRouter.route('/report/new', {
 	name: 'new_report',
+	triggersEnter: [checkLoggedIn],
 	action: function() {
 		BlazeLayout.render("mainLayout", {header: "nav", main: "new_report", footer: "footer"});
 	}

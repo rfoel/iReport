@@ -1,3 +1,128 @@
+Template.user.helpers({
+	user: function(){
+		return Meteor.user();
+	}
+})
+
+Template.user.events({
+	'submit #update-form' : function(e, t) {
+		e.preventDefault();
+		var name = t.find('#name').value,
+		surname = t.find('#surname').value,
+		email = t.find('#email').value;
+
+		Meteor.call('user.update', Meteor.userId(), name, surname, email, function(err) {
+			if(err){
+				Materialize.toast(err, 4000, 'pink accent-3');
+			}else{
+				Materialize.toast('Seu perfil foi alterado com sucesso!', 4000, 'green accent-4');
+			}
+		});
+
+		return false;
+	}
+});
+
+Template.user.onRendered(function(){
+	$("#update-form").validate({
+		rules: {
+			name: {
+				required: true
+			},
+			surname: {
+				required: true
+			},
+			email: {
+				required: true,
+				email:true
+			}
+		},
+		messages: {
+			name:{
+				required: "Campo nome é obrigatório"
+			},
+			surname:{
+				required: "Campo sobrenome é obrigatório"
+			},
+			email: {
+				required: "Campo email é obrigatório",
+				email: "Email inválido"
+			}
+		},
+		errorElement : 'div',
+		errorPlacement: function(error, element) {
+			var placement = $(element).data('error');
+			if (placement) {
+				$(placement).append(error)
+			} else {
+				error.insertAfter(element);
+			}
+		}
+	});
+});
+
+
+Template.change_password.events({
+	'submit #change-form' : function(e, t) {
+		e.preventDefault();
+		var password = t.find('#password').value,
+		new_password = t.find('#new_password').value;
+		confirm_password = t.find('#confirm_password').value;
+
+		Accounts.changePassword(password, new_password, function(err){
+			if (err) {
+				Materialize.toast(err, 4000, 'pink accent-3');
+			} else {
+				Materialize.toast('Senha alterada com sucesso!', 4000, 'green accent-4');
+			}
+		}); 
+		return false;
+	}
+});
+
+Template.change_password.onRendered(function(){
+	$("#change-form").validate({
+		rules: {
+			password: {
+				required: true,
+				minlength: 6
+			},
+			new_password: {
+				required: true,
+				minlength: 6
+			},
+			confirm_password: {
+				required: true,
+				minlength: 6,
+				equalTo: "#new_password"
+			},
+		},
+		messages: {
+			password:{
+				required: "Campo senha é obrigatório",
+			},
+			password:{
+				required: "Campo nova senha é obrigatório",
+				minlength: "Campo nova senha deve contem pelo menos 6 caracteres"
+			},
+			confirm_password:{
+				required: "Campo confirmar senha é obrigatório",
+				minlength: "Campo senha deve contem pelo menos 6 caracteres",
+				equalTo: "Campo confirmar senha deve ser igual ao campo nova senha"
+			}
+		},
+		errorElement : 'div',
+		errorPlacement: function(error, element) {
+			var placement = $(element).data('error');
+			if (placement) {
+				$(placement).append(error)
+			} else {
+				error.insertAfter(element);
+			}
+		}
+	});
+});
+
 Template.login.events({
 	'submit #login-form' : function(e, t){
 		e.preventDefault();
@@ -139,7 +264,7 @@ Template.login.onRendered(function(){
 	});
 });
 
-Template.ForgotPassword.events({
+Template.forgot_password.events({
 	'submit #forgot-form': function(e, t) {
 		e.preventDefault();
 		var forgot_form = $(e.currentTarget),
@@ -169,7 +294,7 @@ Template.ForgotPassword.events({
 	},
 });
 
-Template.ForgotPassword.onRendered(function(){
+Template.forgot_password.onRendered(function(){
 	$("#forgot-form").validate({
 		rules: {
 			forgot_email: {
@@ -202,13 +327,13 @@ Template.ForgotPassword.onRendered(function(){
 // 	}
 // });
 
-Template.ResetPassword.helpers({
+Template.reset_password.helpers({
 	resetPassword: function(){
 		return Session.get('resetPassword');
 	}
 });
 
-Template.ResetPassword.onRendered(function(){
+Template.reset_password.onRendered(function(){
 	$("#reset-form").validate({
 		rules: {
 			password: {
@@ -244,7 +369,7 @@ Template.ResetPassword.onRendered(function(){
 	});
 });
 
-Template.ResetPassword.events({
+Template.reset_password.events({
 	'submit #reset-form': function(e, t) {
 		e.preventDefault();
 

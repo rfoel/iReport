@@ -25,9 +25,9 @@ fourseven:scss
 poetic:materialize-scss
 accounts-base
 accounts-password
-juliancwirko:s-alert
 fortawesome:fontawesome
 themeteorchef:jquery-validation
 zimme:active-route
 email
 momentjs:moment
+session

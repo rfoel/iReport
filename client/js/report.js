@@ -20,4 +20,4 @@ Template.new_report.events({
 		$('#description').trigger('autoresize');
 		$('#description').focusin().focusout();
 	}
-})
+});

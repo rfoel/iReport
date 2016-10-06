@@ -1,5 +1,84 @@
 <template name="user">
-    <h1>User</h1>
+    <nav class="z-depth-0 transparent black-text">
+        <div class="nav-wrapper">
+            <div class="col s12">
+                <a href="/" class="breadcrumb">Home</a>
+                <a href="/user" class="breadcrumb">Meu perfil</a>
+            </div>
+        </div>
+    </nav>
+    <div class="row">
+        <div class="col s12 m4 offset-m4">
+            <div class="row center-align">
+                <h5>Meu perfil</h5>
+            </div>
+            <form id="update-form" action="action">
+                <div class="row left-align">                    
+                    <div class="input-field col s12">
+                        <input id="name" name="name" type="text" value="{{user.profile.name}}" required>
+                        <label for="name" class="active">Nome</label>
+                    </div>
+                </div>
+                <div class="row left-align">                    
+                    <div class="input-field col s12">
+                        <input id="surname" name="surname" type="text" value="{{user.profile.surname}}" required>
+                        <label for="surname" class="active">Sobrenome</label>
+                    </div>
+                </div>
+                <div class="row left-align">                    
+                    <div class="input-field col s12">
+                        <input id="email" name="email" type="email" value="{{user.emails.[0].address}}" required>
+                        <label for="email" class="active">Email</label>
+                    </div>
+                </div>
+                <div class="row center-align">
+                    <button id="create-account" class="btn waves-effect" type="submit" name="action">Atualizar</button>
+                </div>
+            </form> 
+        </div>
+    </div>
+</template>
+
+<template name="change_password">
+    <nav class="z-depth-0 transparent black-text">
+        <div class="nav-wrapper">
+            <div class="col s12">
+                <a href="/" class="breadcrumb">Home</a>
+                <a href="/user" class="breadcrumb">Meu perfil</a>
+                <a href="/user" class="breadcrumb">Alterar senha</a>
+            </div>
+        </div>
+    </nav>
+    <div class="row">
+        <div class="col s12 m4 offset-m4">
+            <div class="row center-align">
+                <h5>Alterar senha</h5>
+            </div>
+            <form id="update-form" action="action">
+                <div class="row left-align">
+                    <div class="input-field col s12">
+                        <input id="password" name="password" type="password" required>
+                        <label for="password">Senha antiga</label>
+                    </div>
+                </div>
+                <div class="row left-align">
+                    <div class="input-field col s12">
+                        <input id="new_password" name="new_password" type="password" required>
+                        <label for="new_password">Nova senha</label>
+                    </div>
+                </div>
+                <div class="row left-align">
+                    <div class="input-field col s12">
+                        <input id="confirm_password" name="confirm_password" type="password" required>
+                        <label for="confirm_password">Confirmar nova senha</label>
+                    </div>
+                </div>
+                <div class="row center-align">
+                    <button id="create-account" class="btn waves-effect" type="submit" name="action">Alterar</button>
+                </div>
+            </form> 
+        </div>
+    </div>
 </template>
 
 <template name="login">
@@ -31,7 +110,7 @@
                 </div>
                 <div class="row right-align">
                     <label>
-                        <a class='pink-text' href='/ForgotPassword'>Esqueceu a senha?</a>
+                        <a class='pink-text' href='/forgot-password'>Esqueceu a senha?</a>
                     </label>
                 </div>
                 <div class="row">
@@ -82,13 +161,13 @@
     </div>
 </template>
 
-<template name="ForgotPassword">
+<template name="forgot_password">
     <nav class="z-depth-0 transparent black-text">
         <div class="nav-wrapper">
             <div class="col s12">
                 <a href="/" class="breadcrumb">Home</a>
                 <a href="/login" class="breadcrumb">Login</a>
-                <a href="/ForgotPassword" class="breadcrumb">Esqueci a senha</a>
+                <a href="/forgot-password" class="breadcrumb">Esqueci a senha</a>
             </div>
         </div>
     </nav>
@@ -112,14 +191,14 @@
     </div>
 </template>
 
-<template name="ResetPassword">
+<template name="reset_password">
     {{#if resetPassword}}
     <nav class="z-depth-0 transparent black-text">
         <div class="nav-wrapper">
             <div class="col s12">
                 <a href="/" class="breadcrumb">Home</a>
                 <a href="/login" class="breadcrumb">Login</a>
-                <a href="/ForgotPassword" class="breadcrumb">Esqueci a senha</a>
+                <a href="/forgot-password" class="breadcrumb">Esqueci a senha</a>
                 <a href="/reset-password" class="breadcrumb">Nova senha</a>
             </div>
         </div>

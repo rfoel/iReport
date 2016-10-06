@@ -1,6 +1,3 @@
-import { Meteor } from 'meteor/meteor';
-import { Mongo } from 'meteor/mongo';
-
 Template.category_item.onRendered(function() {
 	$(document).on('click.card', '.card', function (e) {
 		if ($(this).find('> .card-reveal').length) {
@@ -52,26 +49,45 @@ Template.category_deleted.helpers({
 Template.category.events({
 	"click #delete":function(event){
 		var category_id = this._id;
-		Meteor.call('category.softRemove', category_id);
-		return false;
+		Meteor.call('category.softRemove', category_id, function(err) {
+			if(err){
+				Materialize.toast(err, 4000, 'pink accent-3');
+			}else{
+				Materialize.toast('A categoria foi enviada para categorias deletadas', 4000, 'green accent-4');
+			}
+		});
+	},
+	"click #edit":function(event){
+		Session.set('categoryId', this._id);
+		var id = Session.get('categoryId');
+		FlowRouter.go('/category/edit/'+this._id);
 	}
 });
 
 Template.category_deleted.events({
 	"click #restore":function(event){
 		var category_id = this._id;
-		Meteor.call('category.restore', category_id);
-		return false;
+		Meteor.call('category.restore', category_id, function(err) {
+			if(err){
+				Materialize.toast(err, 4000, 'pink accent-3');
+			}else{
+				Materialize.toast('A categoria foi restaurada!', 4000, 'green accent-4');
+			}
+		});
 	},
 	"click #delete":function(event){
 		if (confirm("A categoria " + this.title + " será excluida permanentemente, você tem certeza?") == true) {
 			var category_id = this._id;
-			Meteor.call('category.remove', category_id);
+			Meteor.call('category.remove', category_id, function(err) {
+				if(err){
+					Materialize.toast(err, 4000, 'pink accent-3');
+				}else{
+					Materialize.toast('A categoria foi removida.', 4000, 'green accent-4');
+				}
+			});
 		}
-		return false;
 	}
 });
-
 
 Template.new_category.events({
 	'submit #new-category' : function(e, t){
@@ -80,10 +96,57 @@ Template.new_category.events({
 		var title = t.find('#title').value,
 		model = t.find('#model').value;
 
-		Meteor.call('category.insert', title, model);
+		Meteor.call('category.insert', title, model, function(err) {
+			if(err){
+				Materialize.toast(err, 4000, 'pink accent-3');
+			}else{
+				Materialize.toast('A categoria foi adicionada com sucesso!', 4000, 'green accent-4');
+			}
+		});
 
 		FlowRouter.go('/category');
 
 		return false;
 	}
+});
+
+Template.edit_category.events({
+	'submit #edit-category' : function(e, t){
+		e.preventDefault();
+
+		var id = FlowRouter.getParam('categoryId');
+		var title = t.find('#title').value,
+		model = t.find('#model').value;
+
+		Meteor.call('category.update', id, title, model, function(err) {
+			if(err){
+				Materialize.toast(err, 4000, 'pink accent-3');
+			}else{
+				Materialize.toast('A categoria foi alterada com sucesso!', 4000, 'green accent-4');
+			}
+		});
+
+		return false;
+	},
+	'change #model' : function() {
+		$('#model').trigger('autoresize');
+		$('#model').focusin().focusout();
+	}
+});
+
+Template.edit_category.helpers({
+	category:function () {
+		var id = Session.get('categoryId');
+
+		return Category.findOne({_id:id});
+	}
+});
+
+Template.edit_category.onCreated(function() {
+	var self = this;
+	self.autorun(function() {
+		var id = FlowRouter.getParam('categoryId');
+		Session.set('categoryId', id);
+    // self.subscribe('singlePost', postId);  
+});
 });
