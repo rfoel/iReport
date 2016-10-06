@@ -1,5 +1,10 @@
 import { Session } from 'meteor/session'
 
+Template.mainLayout.onCreated(function() {
+	Meteor.subscribe('category');
+	Meteor.subscribe('report');
+});
+
 Template.nav.onRendered(function() {
 	$(".button-collapse").sideNav({
 		closeOnClick: true

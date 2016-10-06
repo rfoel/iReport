@@ -27,24 +27,22 @@
             <a data-activates="mobile-nav" class="button-collapse"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
                 {{#if currentUser}}
+                <li class="{{isActiveRoute 'report'}}"><a href="/report"><i class="material-icons">description</i></a></li>
+                <li class="{{isActiveRoute 'new_report'}}"><a href="/report/new"><i class="material-icons">note_add</i></a></li>
+                <li class="{{isActiveRoute 'category'}}"><a href="/category"><i class="material-icons">settings</i></a></li>
                 {{> dropdown_profile}}
                 {{else}}
                 <li class="{{isActiveRoute 'login'}}"><a href="/login">Login</a></li>
                 {{/if}}
             </ul>
-            <ul id="dropdown-profile" class="dropdown-content"> 
-                <li><a href="/user">Meu perfil</a></li>
-                <li><a href="/category">Categorias</a></li>
-                <li class="divider"></li>
-                <li><a href="/logout">Logout</a></li>
-            </ul>
             <ul class="side-nav" id="mobile-nav">
                 {{#if currentUser}}
                 <li class="{{isActiveRoute 'report'}}"><a href="/report">Relatórios</a></li>
                 <li class="{{isActiveRoute 'new_report'}}"><a href="/report/new">Novo relatório</a></li>
+                <li><a href="/category">Categorias</a></li>
                 <li class="divider"></li>
                 <li><a href="/user">Meu perfil</a></li>
-                <li><a href="/category">Categorias</a></li>
+                <li><a href="/user/change-password">Alterar senha</a></li>
                 <li><a href="/logout">Logout</a></li>
                 {{else}}
                 <li  class="{{isActiveRoute 'login'}}"><a href="/login">Login</a></li>
@@ -55,9 +53,14 @@
 </template>
 
 <template name="dropdown_profile">
-    <li class="{{isActiveRoute 'report'}}"><a href="/report"><i class="material-icons">description</i></a></li>
-    <li class="{{isActiveRoute 'new_report'}}"><a href="/report/new"><i class="material-icons">note_add</i></a></li>
     <li><a class="dropdown-button" data-activates="dropdown-profile">@{{currentUser.profile.name}}<i class="material-icons right">arrow_drop_down</i></a></li>
+
+    <ul id="dropdown-profile" class="dropdown-content"> 
+        <li><a href="/user">Meu perfil</a></li>
+        <li><a href="/user/change-password">Alterar senha</a></li>
+
+        <li><a href="/logout">Logout</a></li>
+    </ul>
 </template>
 
 <template name="footer">

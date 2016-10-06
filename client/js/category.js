@@ -36,13 +36,13 @@ Template.category_options.events({
 
 Template.category.helpers({
 	category:function () {
-		return Category.find({deleted:false});
+		return Category.find({ $and: [{ createdBy: Meteor.userId() }, { deleted: false }]});
 	}
 });
 
 Template.category_deleted.helpers({
 	category:function () {
-		return Category.find({deleted:true});
+		return Category.find({ $and: [{ createdBy: Meteor.userId() }, { deleted: true }]});
 	}
 });
 

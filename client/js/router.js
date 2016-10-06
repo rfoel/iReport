@@ -26,6 +26,14 @@ FlowRouter.route('/user', {
 	}
 });
 
+FlowRouter.route('/user/change-password', {
+	name: 'change_password',
+	triggersEnter: [checkLoggedIn],
+	action: function() {
+		BlazeLayout.render("mainLayout", {header: "nav", main: "change_password", footer: "footer"});
+	}
+});
+
 FlowRouter.route('/category', {
 	name: 'category',
 	triggersEnter: [checkLoggedIn],

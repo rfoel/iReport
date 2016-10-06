@@ -228,14 +228,15 @@
         <div class="row">
             <h5>Visualizar relatório</h5>
         </div>
-        <form id="view-report" action="/report/edit" method="post">
-            <div class="row">                    
+        <form id="view-report" action="/report/" method="post">
+            <div class="row">  
+                <input id="id" type="hidden" value="{{report._id}}">
                 <div class="input-field col s12 m6 l4">
-                    <input disabled id="name" name="name" type="text" value="{{report.name}}" required>
+                    <input readonly id="name" name="name" type="text" value="{{report.name}}" required>
                     <label class="active" for="name">Nome do cliente ou empresa</label>
                 </div>
                 <div class="input-field col s12 m6 l4">
-                    <input id="date" name="date" type="text" value="{{report.datetime}}" disabled>
+                    <input id="date" name="date" type="text" value="{{report.datetime}}" readonly>
                     <label class="active" for="date">Hora/data</label>
                 </div>
                 <div class="input-field col s12 m6 l4">
@@ -255,8 +256,8 @@
                 <form class="col s12">
                     <div class="row">
                         <div class="input-field col s12">
-                            <textarea disabled id="description" class="materialize-textarea">{{report.description}}</textarea>
-                            <label  class="active" id="label_description" for="description">Descrição</label>
+                            <textarea readonly id="description" class="materialize-textarea">{{report.description}}</textarea>
+                            <label class="active" id="label_description" for="description">Descrição</label>
                         </div>
                     </div>
                 </form>

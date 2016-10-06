@@ -1,12 +1,12 @@
 Template.report.helpers({
 	report:function(){
-		return Report.find({deleted:false});
+		return Report.find({ $and: [{ createdBy: Meteor.userId() }, { deleted: false }]});
 	}
 });
 
 Template.report_deleted.helpers({
 	report:function () {
-		return Report.find({deleted:true});
+		return Report.find({ $and: [{ createdBy: Meteor.userId() }, { deleted: true }]});
 	}
 });
 
@@ -66,7 +66,7 @@ Template.new_report.helpers({
 		return datetime;
 	},
 	category:function () {
-		return Category.find({deleted:false});
+		return Category.find({ $and: [{ createdBy: Meteor.userId() }, { deleted: false }]});
 	}
 });
 
@@ -117,10 +117,9 @@ Template.edit_report.helpers({
 		return Report.findOne({_id:id});
 	},
 	category:function () {
-		return Category.find({deleted:false});
+		return Category.find({ $and: [{ createdBy: Meteor.userId() }, { deleted: false }]});
 	},
 	equals:function (a, b) {
-		console.log('oi', a === b);
 		return a === b;
 	}
 });
@@ -167,7 +166,7 @@ Template.view_report.helpers({
 		return Report.findOne({_id:id});
 	},
 	category:function () {
-		return Category.find({deleted:false});
+		return Category.find({ $and: [{ createdBy: Meteor.userId() }, { deleted: false }]});
 	},
 	equals:function (a, b) {
 		return a === b;
@@ -203,5 +202,21 @@ Template.view_report.events({
 	},
 	'focus #description' : function(){
 		$('#description').trigger('autoresize');
-	}
+	},
+	"click #delete":function(event){
+		var id = FlowRouter.getParam('reportId');
+		if (confirm("O relatório será excluido permanentemente, você tem certeza?") == true) {
+			Meteor.call('report.remove', id, function(err) {
+				if(err){
+					Materialize.toast(err, 4000, 'pink accent-3');
+				}else{
+					Materialize.toast('O relatório foi deletado', 4000, 'green accent-4');
+				}
+			});
+		}
+	},
+	"click #edit":function(event){
+		var id = FlowRouter.getParam('reportId');
+		FlowRouter.go('/report/edit/'+id);
+	},
 });

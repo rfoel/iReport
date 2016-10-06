@@ -1,3 +1,12 @@
+Meteor.publish('category', function() {
+	return Category.find();
+});
+
+Meteor.publish('report', function() {
+	return Report.find();
+});
+
+
 Meteor.methods({
 	'user.update' (user_id, name, surname, email) {
 		if (!this.userId) {
