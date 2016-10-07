@@ -85,7 +85,7 @@
 </template>
 
 <template name="report_options">
-    <div style="position: relative;  top: 22px">
+    <div class="option">
         <div class="fixed-action-btn horizontal click-to-toggle" style="position: absolute; display: inline-block;">
             <a class="btn-floating btn-large waves-effect"><i class="large material-icons">description</i></a>
             <ul>
@@ -119,19 +119,12 @@
                     <label for="name">Nome do cliente ou empresa</label>
                 </div>
                 <div class="input-field col s12 m6 l4">
-                    <input id="date" name="date" type="text" value="{{getDate}}" placeholder="" readonly>
+                    <input id="date" name="date" type="text" value="{{getDate}}" readonly>
                     <label class="active" for="date">Hora/data</label>
                 </div>
                 <div class="input-field col s12 m6 l4">
                     <select id="category">
-                        {{#if category.count}}
-                        <option value="" disabled selected>Escolha uma categoria</option>
-                        {{#each category}}
-                        <option value="{{_id}}">{{title}}</option>
-                        {{/each}}
-                        {{else}}
-                        <option value="" disabled selected>Não existem categorias</option>
-                        {{/if}}
+                        {{> category_items}}
                     </select>
                     <label>Categoria</label>
                 </div>
@@ -140,8 +133,8 @@
                 <form class="col s12">
                     <div class="row">
                         <div class="input-field col s12">
-                            <textarea id="description" class="materialize-textarea"></textarea>
-                            <label id="label_description" for="description">Descrição</label>
+                            <textarea id="description"  name="description" class="materialize-textarea" required></textarea>
+                            <label for="description">Descrição</label>
                         </div>
                     </div>
                 </form>
@@ -151,6 +144,17 @@
             </div>
         </form> 
     </div>
+</template>
+
+<template name="category_items">
+    {{#if category.count}}
+    <option value="" disabled selected>Escolha uma categoria</option>
+    {{#each category}}
+    <option value="{{_id}}">{{title}}</option>
+    {{/each}}
+    {{else}}
+    <option value="" disabled selected>Não existem categorias</option>
+    {{/if}}
 </template>
 
 <template name="edit_report">
@@ -180,18 +184,7 @@
                 </div>
                 <div class="input-field col s12 m6 l4">
                     <select id="category">
-                        {{#if category.count}}
-                        <option value="" disabled>Escolha uma categoria</option>
-                        {{#each category}}
-                        {{#if equals _id report.category}}
-                        <option value="{{_id}}" selected>{{title}}</option>
-                        {{else}}
-                        <option value="{{_id}}">{{title}}</option>
-                        {{/if}}
-                        {{/each}}
-                        {{else}}
-                        <option value="" disabled selected>Não existem categorias</option>
-                        {{/if}}
+                        {{> category_items}}
                     </select>
                     <label>Categoria</label>
                 </div>
@@ -241,13 +234,7 @@
                 </div>
                 <div class="input-field col s12 m6 l4">
                     <select id="category" disabled>
-                        {{#each category}}
-                        {{#if equals _id report.category}}
-                        <option value="{{_id}}" selected>{{title}}</option>
-                        {{else}}
-                        <option value="{{_id}}">{{title}}</option>
-                        {{/if}}
-                        {{/each}}
+                        {{> category_items}}
                     </select>
                     <label>Categoria</label>
                 </div>
@@ -263,12 +250,16 @@
                 </form>
             </div>
             <div class="row">
-                <button id="back" class="btn waves-effect">Voltar</button>
-                <div style="margin-right: 36px;">
-                    <button id="edit" class="btn-floating btn-large waves-effect green accent-4" style="float: right; margin-left: 10px; bottom: 46px"><i class="material-icons">edit</i></button>
-                    <button id="delete" class="btn-floating btn-large waves-effect pink accent-3" style="float: right; margin-left: 10px; bottom: 46px"><i class="material-icons">delete</i></button>
-                    <button id="withDate" class="btn-floating btn-large waves-effect light-blue darken-4 tooltipped" data-tooltip="Copiar com data" style="float: right; margin-left: 10px; bottom: 46px"><i class="material-icons">schedule</i></button>
-                    <button id="withDateAndUser" class="btn-floating btn-large waves-effect light-blue darken-4 tooltipped" data-tooltip="Copiar com data e usuário" style="float: right; margin-left: 10px; bottom: 46px"><i class="material-icons">perm_identity</i></button>
+                <div class="col s12 m4">
+                    <button id="back" class="btn waves-effect">Voltar</button>
+                </div>
+                <div class="col s12 m8">
+                    <div class="right">
+                        <button id="withDateAndUser" class="btn-floating btn-large waves-effect light-blue darken-4 tooltipped options" data-tooltip="Copiar com data e usuário"><i class="material-icons">perm_identity</i></button>
+                        <button id="withDate" class="btn-floating btn-large waves-effect light-blue darken-4 tooltipped options" data-tooltip="Copiar com data"><i class="material-icons">schedule</i></button>
+                        <button id="edit" class="btn-floating btn-large waves-effect green accent-4 options"><i class="material-icons">edit</i></button>
+                        <button id="delete" class="btn-floating btn-large waves-effect pink accent-3 options"><i class="material-icons">delete</i></button>
+                    </div>
                 </div>
             </div>
         </form> 

@@ -58,6 +58,15 @@ nav li.active a {
 	.breadcrumb:not(:first-child):not(:last-child) {
 		display: none;
 	}
+
+	.option {
+		position: relative;  
+		margin-top: 5px;
+	}
+
+	.options {
+		top: 30px;
+	}
 }
 
 .button-collapse {
@@ -92,4 +101,19 @@ footer .page-footer {
 	cursor: pointer;
 	width:1%;
 	white-space:nowrap;
+}
+
+.option {
+	position: relative;  
+	top: 22px;
+}
+
+
+.options {
+	margin-left: 5px; 
+	bottom: 11px;
+}
+
+.bottom-options {
+	margin-right: 36px;
 }

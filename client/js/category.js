@@ -34,6 +34,12 @@ Template.category_options.events({
 	}
 });
 
+Template.category_items.helpers({
+	category:function () {
+		return Category.find({ $and: [{ createdBy: Meteor.userId() }, { deleted: false }]});
+	}
+});
+
 Template.category.helpers({
 	category:function () {
 		return Category.find({ $and: [{ createdBy: Meteor.userId() }, { deleted: false }]});

@@ -320,13 +320,6 @@ Template.forgot_password.onRendered(function(){
 	});
 });
 
-// Template.ResetPassword.onCreated(function(){
-// 	if (Accounts._resetPasswordToken) {
-// 		Session.set('resetPassword', Accounts._resetPasswordToken);
-// 		console.log('setting token', Session.get('resetPassword'));
-// 	}
-// });
-
 Template.reset_password.helpers({
 	resetPassword: function(){
 		return Session.get('resetPassword');

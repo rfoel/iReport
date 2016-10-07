@@ -58,15 +58,40 @@ Template.report_actions.events({
 
 Template.new_report.onRendered(function() {
 	$('select').material_select();
+	
+	$("#new-report").validate({
+		rules: {
+			name: {
+				required: true,
+			},
+			description: {
+				required: true,
+			},
+		},
+		messages: {
+			name:{
+				required: "Campo nome é obrigatório",
+			},
+			description:{
+				required: "Campo descrição é obrigatório",
+			}
+		},
+		errorElement : 'div',
+		errorPlacement: function(error, element) {
+			var placement = $(element).data('error');
+			if (placement) {
+				$(placement).append(error)
+			} else {
+				error.insertAfter(element);
+			}
+		}
+	});
 });
 
 Template.new_report.helpers({
 	getDate:function () {
 		var datetime = moment().format('HH:mm DD/MM/YYYY');
 		return datetime;
-	},
-	category:function () {
-		return Category.find({ $and: [{ createdBy: Meteor.userId() }, { deleted: false }]});
 	}
 });
 
@@ -89,21 +114,21 @@ Template.new_report.events({
 			if(err){
 				Materialize.toast(err, 4000, 'pink accent-3');
 			}else{
-				console.log(result);
 				Materialize.toast('Relatório criado com sucesso!', 4000, 'green accent-4');
 				FlowRouter.go('/report/'+result);
-
 			}
 		});
 
 		return false;
 	},
 	'change #category' : function(){
-		var category_id = $('#category').val();
-		var model = Category.findOne({_id:category_id}).model;
-		$('#description').val(model);
-		$('#description').trigger('autoresize');
-		$('#description').focusin().focusout();
+		if(!($('#description').val())) {
+			var category_id = $('#category').val();
+			var model = Category.findOne({_id:category_id}).model;
+			$('#description').val(model);
+			$('#description').trigger('autoresize');
+			$('#description').focusin().focusout();
+		}
 	}
 });
 
@@ -115,9 +140,6 @@ Template.edit_report.helpers({
 	report:function () {
 		var id = Session.get('reportId');
 		return Report.findOne({_id:id});
-	},
-	category:function () {
-		return Category.find({ $and: [{ createdBy: Meteor.userId() }, { deleted: false }]});
 	},
 	equals:function (a, b) {
 		return a === b;
@@ -153,6 +175,15 @@ Template.edit_report.events({
 	},
 	'focus #description' : function(){
 		$('#description').trigger('autoresize');
+	},
+	'change #category' : function(){
+		if(!($('#description').val())) {
+			var category_id = $('#category').val();
+			var model = Category.findOne({_id:category_id}).model;
+			$('#description').val(model);
+			$('#description').trigger('autoresize');
+			$('#description').focusin().focusout();
+		}
 	}
 });
 
@@ -164,9 +195,6 @@ Template.view_report.helpers({
 	report:function () {
 		var id = Session.get('reportId');
 		return Report.findOne({_id:id});
-	},
-	category:function () {
-		return Category.find({ $and: [{ createdBy: Meteor.userId() }, { deleted: false }]});
 	},
 	equals:function (a, b) {
 		return a === b;
@@ -211,6 +239,7 @@ Template.view_report.events({
 					Materialize.toast(err, 4000, 'pink accent-3');
 				}else{
 					Materialize.toast('O relatório foi deletado', 4000, 'green accent-4');
+					FlowRouter.go('/report');
 				}
 			});
 		}
@@ -219,6 +248,9 @@ Template.view_report.events({
 	"click #edit":function(event){
 		var id = FlowRouter.getParam('reportId');
 		FlowRouter.go('/report/edit/'+id);
+	},
+	"click #back":function(event){
+		FlowRouter.go('/report');
 	},
 	"click #withDate":function(e, t){
 		e.preventDefault();
