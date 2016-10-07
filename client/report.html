@@ -16,8 +16,8 @@
         <thead>
             <tr>
                 <th>Nome</th>
-                <th>Hora/Data</th>
-                <th>Categoria</th>
+                <th class="hide-on-small-only">Hora/Data</th>
+                <th class="hide-on-small-only">Categoria</th>
                 <th>Ações</th>
             </tr>
         </thead>
@@ -31,15 +31,6 @@
         <h4 class="center-align grey-text">Você não tem relatórios :(</h4>
         {{/if}}  
     </table>
-</template>
-
-<template name="report_item">
-    <tr id="{{_id}}">
-        <td>{{name}}</td>
-        <td>{{datetime}}</td>
-        <td>{{getCategory category}}</td>
-        <td class="actions">{{> report_actions}}</td>
-    </tr>
 </template>
 
 <template name="report_deleted">
@@ -61,8 +52,8 @@
         <thead>
             <tr>
                 <th>Nome</th>
-                <th>Hora/Data</th>
-                <th>Categoria</th>
+                <th class="hide-on-small-only">Hora/Data</th>
+                <th class="hide-on-small-only">Categoria</th>
                 <th>Ações</th>
             </tr>
         </thead>
@@ -78,10 +69,17 @@
     </table>
 </template>
 
+<template name="report_item">
+    <tr id="{{_id}}">
+        <td>{{name}}</td>
+        <td class="hide-on-small-only">{{datetime}}</td>
+        <td class="hide-on-small-only">{{getCategory category}}</td>
+        <td class="actions">{{> report_actions}}</td>
+    </tr>
+</template>
+
 <template name="report_actions">
-    <div class="right">
-        <i id="view" class="material-icons tooltipped" data-tooltip="Visualizar relatório">visibility</i><i id="edit" class="material-icons tooltipped" data-tooltip="Editar relatório">edit</i><i id="restore" class="material-icons tooltipped" data-tooltip="Restaurar relatório">restore</i><i id="delete" class="material-icons tooltipped" data-tooltip="Apagar relatório">delete</i>
-    </div>
+    <i id="view" class="material-icons tooltipped" data-tooltip="Visualizar relatório">visibility</i><i id="edit" class="material-icons tooltipped" data-tooltip="Editar relatório">edit</i><i id="restore" class="material-icons tooltipped" data-tooltip="Restaurar relatório">restore</i><i id="delete" class="material-icons tooltipped" data-tooltip="Apagar relatório">delete</i>
 </template>
 
 <template name="report_options">
