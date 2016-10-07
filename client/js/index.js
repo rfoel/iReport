@@ -3,9 +3,13 @@ import { Session } from 'meteor/session'
 Template.mainLayout.onCreated(function() {
 	Meteor.subscribe('category');
 	Meteor.subscribe('report');
+
+	setTimeout(function(){
+		$('.tooltipped').tooltip({ delay: 50 });
+	}, 500 );
 });
 
-Template.nav.onRendered(function() {
+Template.nav.onCreated(function() {
 	$(".button-collapse").sideNav({
 		closeOnClick: true
 	});
@@ -14,15 +18,8 @@ Template.nav.onRendered(function() {
 	});
 });
 
-Template.dropdown_profile.onRendered(function() {
+Template.dropdown_profile.onCreated(function() {
 	$(".dropdown-button").dropdown({
 		belowOrigin: true,
-	});
-});
-
-Template.mainLayout.onRendered(function() {
-	$('.tooltipped').tooltip({
-		delay: 50,
-		position: 'top'
 	});
 });

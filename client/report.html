@@ -9,7 +9,12 @@
     </nav>
     {{> report_options}}
     <div class="row">
-        <h5>Relatórios</h5>
+        <h5 class="left">Relatórios</h5>
+        <div class="right">
+            <div class="chip"><i class="material-icons">visibility</i>Visualizar</div>
+            <div class="chip"><i class="material-icons">edit</i>Editar</div>
+            <div class="chip"><i class="material-icons">delete</i>Apagar</div>
+        </div>
     </div>
     <table class="highlight bordered">
         {{#if report.count}}
@@ -45,7 +50,13 @@
     </nav>
     {{> report_options}}
     <div class="row">
-        <h5>Relatórios removidos</h5>
+        <h5 class="left">Relatórios removidos</h5>
+        <div class="right">
+            <div class="chip"><i class="material-icons">visibility</i>Visualizar</div>
+            <div class="chip"><i class="material-icons">edit</i>Editar</div>
+            <div class="chip"><i class="material-icons">restore</i>Restaurar</div>
+            <div class="chip"><i class="material-icons">delete</i>Apagar</div>
+        </div>
     </div>
     <table class="highlight bordered">
         {{#if report.count}}
@@ -74,12 +85,15 @@
         <td>{{name}}</td>
         <td class="hide-on-small-only">{{datetime}}</td>
         <td class="hide-on-small-only">{{getCategory category}}</td>
-        <td class="actions">{{> report_actions}}</td>
+        <td class="actions">
+            <i id="view" class="material-icons">visibility</i>
+            <i id="edit" class="material-icons">edit</i>
+            {{#if checkRoute}}
+            <i id="restore" class="material-icons">restore</i>
+            {{/if}}
+            <i id="delete" class="material-icons">delete</i>
+        </td>
     </tr>
-</template>
-
-<template name="report_actions">
-    <i id="view" class="material-icons tooltipped" data-tooltip="Visualizar relatório">visibility</i><i id="edit" class="material-icons tooltipped" data-tooltip="Editar relatório">edit</i><i id="restore" class="material-icons tooltipped" data-tooltip="Restaurar relatório">restore</i><i id="delete" class="material-icons tooltipped" data-tooltip="Apagar relatório">delete</i>
 </template>
 
 <template name="report_options">

@@ -21,13 +21,6 @@ Template.category_item.onRendered(function() {
 	});
 });
 
-Template.category_options.onRendered(function() {
-	$('.tooltipped').tooltip({
-		delay: 50,
-		position: 'bottom'
-	});
-});
-
 Template.category_options.events({
 	'click .tooltipped': function(event){
 		$('.tooltipped').tooltip('remove');

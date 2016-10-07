@@ -23,30 +23,25 @@ Template.report_deleted.helpers({
 	}
 });
 
-Template.report_item.onRendered(function() {
-	$('.tooltipped').tooltip({
-		delay: 50,
-		position: 'top'
-	});
-});
-
-Template.report_options.events({
-	'click .tooltipped': function(event){
-		$('.tooltipped').tooltip('remove');
+Template.report_deleted.events({
+	"click #delete":function(e){
+		e.preventDefault();
+		if (confirm("O relatório será excluido permanentemente, você tem certeza?") == true) {
+			Meteor.call('report.remove', this._id, function(err) {
+				if(err){
+					Materialize.toast(err, 4000, 'pink accent-3');
+				}else{
+					Materialize.toast('O relatório foi deletado', 4000, 'green accent-4');
+				}
+			});
+		}
+		return false;
 	}
 });
 
-Template.report_actions.events({
-	'click .tooltipped': function(event){
-		$('.tooltipped').tooltip('remove');
-	}
-});
-
-Template.report_actions.events({
-	"click #view":function(event){
-		FlowRouter.go('/report/'+this._id);
-	},
-	"click #delete":function(event){
+Template.report.events({
+	"click #delete":function(e){
+		e.preventDefault();
 		Meteor.call('report.softRemove', this._id, function(err) {
 			if(err){
 				Materialize.toast(err, 4000, 'pink accent-3');
@@ -54,9 +49,6 @@ Template.report_actions.events({
 				Materialize.toast('O relatório foi enviado para relatórios deletados', 4000, 'green accent-4');
 			}
 		});
-	},
-	"click #edit":function(event){
-		FlowRouter.go('/report/edit/'+this._id);
 	},
 	"click #restore":function(event){
 		Meteor.call('report.restore', this._id, function(err) {
@@ -67,6 +59,21 @@ Template.report_actions.events({
 			}
 		});
 	},
+});
+
+Template.report_options.events({
+	'click .tooltipped': function(event){
+		$('.tooltipped').tooltip('remove');
+	}
+});
+
+Template.report_item.events({
+	"click #view":function(event){
+		FlowRouter.go('/report/'+this._id);
+	},
+	"click #edit":function(event){
+		FlowRouter.go('/report/edit/'+this._id);
+	}
 });
 
 Template.new_report.helpers({
@@ -84,8 +91,11 @@ Template.report_item.helpers({
 		else {
 			return 'Sem categoria :(';
 		}
-	}	
-})
+	},
+	checkRoute:function() {
+		return FlowRouter.current().path == '/report/deleted';
+	}
+});
 
 Template.new_report.events({
 	'submit #new-report' : function(e, t){

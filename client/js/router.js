@@ -7,14 +7,14 @@ function checkLoggedIn (ctx, redirect) {
 FlowRouter.route('/', {
 	name: 'home',
 	action: function() {
-		BlazeLayout.render("mainLayout", {header: "nav", main: "home", footer: "footer"});
+		BlazeLayout.render("mainLayout", {main: "home"});
 	}
 });
 
 FlowRouter.route('/login', {
 	name: 'login',
 	action: function() {
-		BlazeLayout.render("mainLayout", {header: "nav", main: "login", footer: "footer"});
+		BlazeLayout.render("mainLayout", {main: "login"});
 	}
 });
 
@@ -22,7 +22,7 @@ FlowRouter.route('/user', {
 	name: 'user',
 	triggersEnter: [checkLoggedIn],
 	action: function() {
-		BlazeLayout.render("mainLayout", {header: "nav", main: "user", footer: "footer"});
+		BlazeLayout.render("mainLayout", {main: "user"});
 	}
 });
 
@@ -30,7 +30,7 @@ FlowRouter.route('/user/change-password', {
 	name: 'change_password',
 	triggersEnter: [checkLoggedIn],
 	action: function() {
-		BlazeLayout.render("mainLayout", {header: "nav", main: "change_password", footer: "footer"});
+		BlazeLayout.render("mainLayout", {main: "change_password"});
 	}
 });
 
@@ -38,7 +38,7 @@ FlowRouter.route('/category', {
 	name: 'category',
 	triggersEnter: [checkLoggedIn],
 	action: function() {
-		BlazeLayout.render("mainLayout", {header: "nav", main: "category", footer: "footer"});
+		BlazeLayout.render("mainLayout", {main: "category"});
 	}
 });
 
@@ -46,7 +46,7 @@ FlowRouter.route('/category/new', {
 	name: 'new_category',
 	triggersEnter: [checkLoggedIn],
 	action: function() {
-		BlazeLayout.render("mainLayout", {header: "nav", main: "new_category", footer: "footer"});
+		BlazeLayout.render("mainLayout", {main: "new_category"});
 	}
 });
 
@@ -54,7 +54,7 @@ FlowRouter.route('/category/edit/:categoryId', {
 	name: 'edit_category',
 	triggersEnter: [checkLoggedIn],
 	action: function(params) {
-		BlazeLayout.render("mainLayout", {header: "nav", main: "edit_category", footer: "footer"});
+		BlazeLayout.render("mainLayout", {main: "edit_category"});
 	}
 });
 
@@ -62,14 +62,14 @@ FlowRouter.route('/category/deleted', {
 	name: 'category_deleted',
 	triggersEnter: [checkLoggedIn],
 	action: function() {
-		BlazeLayout.render("mainLayout", {header: "nav", main: "category_deleted", footer: "footer"});
+		BlazeLayout.render("mainLayout", {main: "category_deleted"});
 	}
 });
 
 FlowRouter.route('/forgot-password', {
 	name: 'ForgotPassword',
 	action: function() {
-		BlazeLayout.render("mainLayout", {header: "nav", main: "ForgotPassword", footer: "footer"});
+		BlazeLayout.render("mainLayout", {main: "ForgotPassword"});
 	}
 });
 
@@ -77,7 +77,7 @@ FlowRouter.route('/reset-password/:token', {
 	name: 'ResetPassword',
 	action: function(params) {
 		Session.set('resetPassword', params.token);
-		BlazeLayout.render("mainLayout", {header: "nav", main: "ResetPassword", footer: "footer"});
+		BlazeLayout.render("mainLayout", {main: "ResetPassword"});
 	}
 });
 
@@ -94,7 +94,7 @@ FlowRouter.route('/report', {
 	name: 'report',
 	triggersEnter: [checkLoggedIn],
 	action: function() {
-		BlazeLayout.render("mainLayout", {header: "nav", main: "report", footer: "footer"});
+		BlazeLayout.render("mainLayout", {main: "report"});
 	}
 });
 
@@ -102,7 +102,7 @@ FlowRouter.route('/report/new', {
 	name: 'new_report',
 	triggersEnter: [checkLoggedIn],
 	action: function() {
-		BlazeLayout.render("mainLayout", {header: "nav", main: "new_report", footer: "footer"});
+		BlazeLayout.render("mainLayout", {main: "new_report"});
 	}
 });
 
@@ -110,7 +110,7 @@ FlowRouter.route('/report/edit/:reportId', {
 	name: 'edit_report',
 	triggersEnter: [checkLoggedIn],
 	action: function() {
-		BlazeLayout.render("mainLayout", {header: "nav", main: "edit_report", footer: "footer"});
+		BlazeLayout.render("mainLayout", {main: "edit_report"});
 	}
 });
 
@@ -118,7 +118,7 @@ FlowRouter.route('/report/deleted', {
 	name: 'report_deleted',
 	triggersEnter: [checkLoggedIn],
 	action: function() {
-		BlazeLayout.render("mainLayout", {header: "nav", main: "report_deleted", footer: "footer"});
+		BlazeLayout.render("mainLayout", {main: "report_deleted"});
 	}
 });
 
@@ -126,7 +126,7 @@ FlowRouter.route('/report/:reportId', {
 	name: 'view_report',
 	triggersEnter: [checkLoggedIn],
 	action: function() {
-		BlazeLayout.render("mainLayout", {header: "nav", main: "view_report", footer: "footer"});
+		BlazeLayout.render("mainLayout", {main: "view_report"});
 	}
 });
 
