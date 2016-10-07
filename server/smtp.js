@@ -1,4 +1,3 @@
-// server/smtp.js
 Meteor.startup(function () {
   smtp = {
     username: 'rafaelfr@outlook.com',

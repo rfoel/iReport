@@ -61,7 +61,6 @@ Template.user.onRendered(function(){
 	});
 });
 
-
 Template.change_password.events({
 	'submit #change-form' : function(e, t) {
 		e.preventDefault();

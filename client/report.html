@@ -112,10 +112,10 @@
         <div class="row">
             <h5>Novo relatório</h5>
         </div>
-        <form id="new-report" action="/report/new" method="post">
+        <form id="new-report">
             <div class="row">                    
                 <div class="input-field col s12 m6 l4">
-                    <input id="name" name="name" type="text" required>
+                    <input id="name" name="name" type="text">
                     <label for="name">Nome do cliente ou empresa</label>
                 </div>
                 <div class="input-field col s12 m6 l4">
@@ -133,14 +133,14 @@
                 <form class="col s12">
                     <div class="row">
                         <div class="input-field col s12">
-                            <textarea id="description"  name="description" class="materialize-textarea" required></textarea>
+                            <textarea id="description" name="description" class="materialize-textarea" type="text"></textarea>
                             <label for="description">Descrição</label>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="row">
-                <button id="btn-submit" class="btn waves-effect" type="submit" name="action">Enviar</button>
+                <button id="btn-submit" class="btn waves-effect" type="submit">Enviar</button>
             </div>
         </form> 
     </div>
@@ -172,10 +172,10 @@
         <div class="row">
             <h5>Editar relatório</h5>
         </div>
-        <form id="edit-report" action="/report/edit" method="post">
+        <form id="edit-report">
             <div class="row">                    
                 <div class="input-field col s12 m6 l4">
-                    <input id="name" name="name" type="text" value="{{report.name}}" required>
+                    <input id="name" name="name" type="text" value="{{report.name}}">
                     <label class="active" for="name">Nome do cliente ou empresa</label>
                 </div>
                 <div class="input-field col s12 m6 l4">
@@ -200,7 +200,7 @@
                 </form>
             </div>
             <div class="row">
-                <button id="btn-submit" class="btn waves-effect" type="submit" name="action">Enviar</button>
+                <button id="btn-submit" class="btn waves-effect" type="submit">Enviar</button>
             </div>
         </form> 
     </div>

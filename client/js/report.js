@@ -69,38 +69,6 @@ Template.report_actions.events({
 	},
 });
 
-Template.new_report.onRendered(function() {
-	$('select').material_select();
-	
-	$("#new-report").validate({
-		rules: {
-			name: {
-				required: true,
-			},
-			description: {
-				required: true,
-			},
-		},
-		messages: {
-			name:{
-				required: "Campo nome é obrigatório",
-			},
-			description:{
-				required: "Campo descrição é obrigatório",
-			}
-		},
-		errorElement : 'div',
-		errorPlacement: function(error, element) {
-			var placement = $(element).data('error');
-			if (placement) {
-				$(placement).append(error)
-			} else {
-				error.insertAfter(element);
-			}
-		}
-	});
-});
-
 Template.new_report.helpers({
 	getDate:function () {
 		var datetime = moment().format('HH:mm DD/MM/YYYY');
@@ -145,7 +113,65 @@ Template.new_report.events({
 	}
 });
 
+Template.new_report.onRendered(function(){
+	$("#new-report").validate({
+		rules: {
+			name: {
+				required: true
+			},
+			description: {
+				required: true
+			}
+		},
+		messages: {
+			name:{
+				required: "Campo nome é obrigatório"
+			},
+			description:{
+				required: "Campo descrição é obrigatório"
+			}
+		},
+		errorElement : 'div',
+		errorPlacement: function(error, element) {
+			var placement = $(element).data('error');
+			if (placement) {
+				$(placement).append(error)
+			} else {
+				error.insertAfter(element);
+			}
+		}
+	});
+	$('select').material_select();
+});
+
 Template.edit_report.onRendered(function() {
+	$("#edit-report").validate({
+		rules: {
+			name: {
+				required: true,
+			},
+			description: {
+				required: true,
+			},
+		},
+		messages: {
+			name:{
+				required: "Campo nome é obrigatório",
+			},
+			description:{
+				required: "Campo descrição é obrigatório",
+			}
+		},
+		errorElement : 'div',
+		errorPlacement: function(error, element) {
+			var placement = $(element).data('error');
+			if (placement) {
+				$(placement).append(error)
+			} else {
+				error.insertAfter(element);
+			}
+		}
+	});
 	$('select').material_select();
 });
 

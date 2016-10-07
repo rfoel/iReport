@@ -99,21 +99,21 @@
             <div class="row center-align">
                 <h5>Nova categoria</h5>
             </div>
-            <form id="new-category" action="/category/new" method="post">
+            <form id="new-category">
                 <div class="row left-align">                  
                     <div class="input-field col s12">
-                        <input id="title" name="title" type="text" required>
+                        <input id="title" name="title" type="text">
                         <label for="title">Título</label>
                     </div>
                 </div>
                 <div class="row left-align">
                     <div class="input-field col s12">
-                        <textarea id="model" class="materialize-textarea"></textarea>
+                        <textarea id="model" name="model" class="materialize-textarea"></textarea>
                         <label for="model">Modelo</label>
                     </div>
                 </div>
                 <div class="row center-align">
-                    <button id="btn-submit" class="btn waves-effect" type="submit" name="action">Enviar</button>
+                    <button id="btn-submit" class="btn waves-effect" type="submit">Enviar</button>
                 </div>
             </form> 
         </div>
@@ -136,21 +136,21 @@
             <div class="row center-align">
                 <h5>Editar categoria</h5>
             </div>
-            <form id="edit-category" action="/category/edit" method="post">
+            <form id="edit-category">
                 <div class="row left-align">                  
                     <div class="input-field col s12">
-                        <input id="title" name="title" type="text" value="{{category.title}}" required>
+                        <input id="title" name="title" type="text" value="{{category.title}}">
                         <label class="active" for="title">Título</label>
                     </div>
                 </div>
                 <div class="row left-align">
                     <div class="input-field col s12">
-                        <textarea id="model" class="materialize-textarea">{{category.model}}</textarea>
+                        <textarea id="model" name="model" class="materialize-textarea">{{category.model}}</textarea>
                         <label class="active" for="model">Modelo</label>
                     </div>
                 </div>
                 <div class="row center-align">
-                    <button id="btn-submit" class="btn waves-effect" type="submit" name="action">Editar</button>
+                    <button id="btn-submit" class="btn waves-effect" type="submit">Editar</button>
                 </div>
             </form> 
         </div>

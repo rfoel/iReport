@@ -153,3 +153,63 @@ Template.edit_category.onCreated(function() {
 		Session.set('categoryId', id);
 	});
 });
+
+Template.new_category.onRendered(function(){
+	$("#new-category").validate({
+		rules: {
+			title: {
+				required: true
+			},
+			model: {
+				required: true
+			}
+		},
+		messages: {
+			title:{
+				required: "Campo título é obrigatório"
+			},
+			model:{
+				required: "Campo modelo é obrigatório"
+			}
+		},
+		errorElement : 'div',
+		errorPlacement: function(error, element) {
+			var placement = $(element).data('error');
+			if (placement) {
+				$(placement).append(error)
+			} else {
+				error.insertAfter(element);
+			}
+		}
+	});
+});
+
+Template.edit_category.onRendered(function(){
+	$("#edit-category").validate({
+		rules: {
+			title: {
+				required: true
+			},
+			model: {
+				required: true
+			}
+		},
+		messages: {
+			title:{
+				required: "Campo título é obrigatório"
+			},
+			model:{
+				required: "Campo modelo é obrigatório"
+			}
+		},
+		errorElement : 'div',
+		errorPlacement: function(error, element) {
+			var placement = $(element).data('error');
+			if (placement) {
+				$(placement).append(error)
+			} else {
+				error.insertAfter(element);
+			}
+		}
+	});
+});
