@@ -196,7 +196,17 @@
                 </div>
                 <div class="input-field col s12 m6 l4">
                     <select id="category">
-                        {{> category_items}}
+                        {{#if category.count}}
+                        <option value="" disabled selected>Escolha uma categoria</option>
+                        {{#each category}}
+                        {{#if equals _id report.category}}
+                        <option value="{{_id}}" selected>{{title}}</option>
+                        {{/if}}
+                        <option value="{{_id}}">{{title}}</option>
+                        {{/each}}
+                        {{else}}
+                        <option value="" disabled selected>Não existem categorias</option>
+                        {{/if}}
                     </select>
                     <label>Categoria</label>
                 </div>
@@ -246,7 +256,17 @@
                 </div>
                 <div class="input-field col s12 m6 l4">
                     <select id="category" disabled>
-                        {{> category_items}}
+                        {{#if category.count}}
+                        <option value="" disabled selected>Escolha uma categoria</option>
+                        {{#each category}}
+                        {{#if equals _id report.category}}
+                        <option value="{{_id}}" selected>{{title}}</option>
+                        {{/if}}
+                        <option value="{{_id}}">{{title}}</option>
+                        {{/each}}
+                        {{else}}
+                        <option value="" disabled selected>Não existem categorias</option>
+                        {{/if}}
                     </select>
                     <label>Categoria</label>
                 </div>

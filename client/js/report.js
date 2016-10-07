@@ -10,6 +10,24 @@ $(window).scroll(function(event){
 	}
 });
 
+Template.new_report.onRendered(function(){
+	setTimeout(function(){
+		$('select').material_select();
+	}, 500 );
+});
+
+Template.edit_report.onRendered(function(){
+	setTimeout(function(){
+		$('select').material_select();
+	}, 500 );
+});
+
+Template.view_report.onRendered(function(){
+	setTimeout(function(){
+		$('select').material_select();
+	}, 500 );
+});
+
 Template.report.helpers({
 	report:function(){
 		return Report.find({ $and: [{ createdBy: Meteor.userId() }, 
@@ -18,8 +36,9 @@ Template.report.helpers({
 });
 
 Template.report_deleted.helpers({
-	report:function () {
-		return Report.find({ $and: [{ createdBy: Meteor.userId() }, { deleted: true }]}, {sort: { createdOn: 1 }});
+	report:function(){
+		return Report.find({ $and: [{ createdBy: Meteor.userId() }, 
+			{ deleted: true }]}, {sort: { createdOn: -1 }, limit: Session.get('reportLimit')});
 	}
 });
 
@@ -156,7 +175,6 @@ Template.new_report.onRendered(function(){
 			}
 		}
 	});
-	$('select').material_select();
 });
 
 Template.edit_report.onRendered(function() {
@@ -187,13 +205,15 @@ Template.edit_report.onRendered(function() {
 			}
 		}
 	});
-	$('select').material_select();
 });
 
 Template.edit_report.helpers({
 	report:function () {
 		var id = Session.get('reportId');
 		return Report.findOne({_id:id});
+	},
+	category:function () {
+		return Category.find({ $and: [{ createdBy: Meteor.userId() }, { deleted: false }]});
 	},
 	equals:function (a, b) {
 		return a === b;
@@ -241,14 +261,13 @@ Template.edit_report.events({
 	}
 });
 
-Template.view_report.onRendered(function() {
-	$('select').material_select();
-});
-
 Template.view_report.helpers({
 	report:function () {
 		var id = Session.get('reportId');
 		return Report.findOne({_id:id});
+	},
+	category:function () {
+		return Category.find({ $and: [{ createdBy: Meteor.userId() }, { deleted: false }]});
 	},
 	equals:function (a, b) {
 		return a === b;
