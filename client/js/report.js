@@ -78,7 +78,12 @@ Template.new_report.helpers({
 
 Template.report_item.helpers({
 	getCategory:function (category_id) {
-		return Category.findOne(category_id).title;
+		if(category_id){
+			return Category.findOne(category_id).title;
+		}
+		else {
+			return 'Sem categoria :(';
+		}
 	}	
 })
 

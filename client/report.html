@@ -123,21 +123,21 @@
                     <label class="active" for="date">Hora/data</label>
                 </div>
                 <div class="input-field col s12 m6 l4">
-                    <select id="category">
+                    <select id="category" name="category">
                         {{> category_items}}
                     </select>
                     <label>Categoria</label>
                 </div>
             </div>
             <div class="row">
-                <form class="col s12">
+                <div class="col s12">
                     <div class="row">
                         <div class="input-field col s12">
                             <textarea id="description" name="description" class="materialize-textarea" type="text"></textarea>
                             <label for="description">Descrição</label>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
             <div class="row">
                 <button id="btn-submit" class="btn waves-effect" type="submit">Enviar</button>
@@ -190,14 +190,14 @@
                 </div>
             </div>
             <div class="row">
-                <form class="col s12">
+                <div class="col s12">
                     <div class="row">
                         <div class="input-field col s12">
                             <textarea id="description" class="materialize-textarea">{{report.description}}</textarea>
                             <label  class="active" id="label_description" for="description">Descrição</label>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
             <div class="row">
                 <button id="btn-submit" class="btn waves-effect" type="submit">Enviar</button>
