@@ -214,9 +214,18 @@ Template.view_report.events({
 				}
 			});
 		}
+		return false;
 	},
 	"click #edit":function(event){
 		var id = FlowRouter.getParam('reportId');
 		FlowRouter.go('/report/edit/'+id);
+	},
+	"click #withDate":function(event){
+
+		return false;
+	},
+	"click #withDateAndUser":function(event){
+
+		return false;
 	},
 });

@@ -33,6 +33,15 @@
     </table>
 </template>
 
+<template name="report_item">
+    <tr id="{{_id}}">
+        <td>{{name}}</td>
+        <td>{{datetime}}</td>
+        <td>{{getCategory category}}</td>
+        <td class="actions">{{> report_actions}}</td>
+    </tr>
+</template>
+
 <template name="report_deleted">
     <nav class="z-depth-0 transparent black-text">
         <div class="nav-wrapper">
@@ -69,15 +78,6 @@
     </table>
 </template>
 
-<template name="report_item">
-    <tr id="{{_id}}">
-        <td>{{name}}</td>
-        <td>{{datetime}}</td>
-        <td>{{getCategory category}}</td>
-        <td class="actions">{{> report_actions}}</td>
-    </tr>
-</template>
-
 <template name="report_actions">
     <div class="right">
         <i id="view" class="material-icons tooltipped" data-tooltip="Visualizar relatório">visibility</i><i id="edit" class="material-icons tooltipped" data-tooltip="Editar relatório">edit</i><i id="restore" class="material-icons tooltipped" data-tooltip="Restaurar relatório">restore</i><i id="delete" class="material-icons tooltipped" data-tooltip="Apagar relatório">delete</i>
@@ -87,7 +87,7 @@
 <template name="report_options">
     <div style="position: relative;  top: 22px">
         <div class="fixed-action-btn horizontal click-to-toggle" style="position: absolute; display: inline-block;">
-            <a class="btn-floating btn-large waves-effect"><i class="large material-icons">more_vert</i></a>
+            <a class="btn-floating btn-large waves-effect"><i class="large material-icons">description</i></a>
             <ul>
                 <li><a id="report" href="/report" class="btn-floating tooltipped light-blue darken-4" data-tooltip="Visualizar relatórios"><i class="material-icons">reorder</i></a></li>
                 <li><a id="deleted" href="/report/deleted" class="btn-floating tooltipped red" data-tooltip="Visualizar relatórios deletados"><i class="material-icons">delete</i></a></li>
@@ -166,7 +166,7 @@
     {{> report_options}}
     <div class="col s12 m12">
         <div class="row">
-            <h5>Novo relatório</h5>
+            <h5>Editar relatório</h5>
         </div>
         <form id="edit-report" action="/report/edit" method="post">
             <div class="row">                    
@@ -228,7 +228,7 @@
         <div class="row">
             <h5>Visualizar relatório</h5>
         </div>
-        <form id="view-report" action="/report/" method="post">
+        <form id="view-report" action="/report/edit/{{report._id}}" method="post">
             <div class="row">  
                 <input id="id" type="hidden" value="{{report._id}}">
                 <div class="input-field col s12 m6 l4">
@@ -267,6 +267,8 @@
                 <div style="margin-right: 36px;">
                     <button id="edit" class="btn-floating btn-large waves-effect green accent-4" style="float: right; margin-left: 10px; bottom: 46px"><i class="material-icons">edit</i></button>
                     <button id="delete" class="btn-floating btn-large waves-effect pink accent-3" style="float: right; margin-left: 10px; bottom: 46px"><i class="material-icons">delete</i></button>
+                    <button id="withDate" class="btn-floating btn-large waves-effect light-blue darken-4 tooltipped" data-tooltip="Copiar com data" style="float: right; margin-left: 10px; bottom: 46px"><i class="material-icons">schedule</i></button>
+                    <button id="withDateAndUser" class="btn-floating btn-large waves-effect light-blue darken-4 tooltipped" data-tooltip="Copiar com data e usuário" style="float: right; margin-left: 10px; bottom: 46px"><i class="material-icons">perm_identity</i></button>
                 </div>
             </div>
         </form> 
