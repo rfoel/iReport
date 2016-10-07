@@ -220,12 +220,45 @@ Template.view_report.events({
 		var id = FlowRouter.getParam('reportId');
 		FlowRouter.go('/report/edit/'+id);
 	},
-	"click #withDate":function(event){
+	"click #withDate":function(e, t){
+		e.preventDefault();
+		var date = t.find('#date').value,
+		description = t.find('#description').value;
 
-		return false;
-	},
-	"click #withDateAndUser":function(event){
+		var clipboard = new Clipboard('#withDate', {
+			text: function() {
+				return date + ' - ' + description;
+			}
+		});
 
-		return false;
+		clipboard.on('success', function(e) {
+			Materialize.toast('Copiado com sucesso!', 4000, 'green accent-4');
+			e.clearSelection();
+		});
+
+		clipboard.on('error', function(e) {
+			Materialize.toast('Ocorreu um erro :(', 4000, 'pink accent-3');
+		});
 	},
+	"click #withDateAndUser":function(e, t){
+		e.preventDefault();
+		var date = t.find('#date').value,
+		description = t.find('#description').value,
+		user = Meteor.user().profile.name + ' ' + Meteor.user().profile.surname;
+
+		var clipboard = new Clipboard('#withDateAndUser', {
+			text: function() {
+				return date + ' - ' + user + '\n' + description;
+			}
+		});
+
+		clipboard.on('success', function(e) {
+			Materialize.toast('Copiado com sucesso!', 4000, 'green accent-4');
+			e.clearSelection();
+		});
+
+		clipboard.on('error', function(e) {
+			Materialize.toast('Ocorreu um erro :(', 4000, 'pink accent-3');
+		});
+	}
 });
