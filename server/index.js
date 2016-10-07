@@ -3,9 +3,8 @@ Meteor.publish('category', function() {
 });
 
 Meteor.publish('report', function() {
-	return Report.find();
+	return Report.find({});
 });
-
 
 Meteor.methods({
 	'user.update' (user_id, name, surname, email) {
@@ -59,7 +58,7 @@ Meteor.methods({
 		}
 		Category.remove(category_id);
 	},
-	'report.insert'(name, description, category, datetime, createOn) {
+	'report.insert'(name, description, category, datetime, createdOn) {
 		if (!this.userId) {
 			throw new Meteor.Error('not-authorized');
 		}
@@ -69,7 +68,7 @@ Meteor.methods({
 			category:category,
 			datetime:datetime,
 			deleted:false,
-			createOn:createOn,
+			createdOn:createdOn,
 			createdBy:this.userId
 		});
 

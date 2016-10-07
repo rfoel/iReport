@@ -1,12 +1,25 @@
+Session.set('reportLimit', 10);
+lastScrollTop = 0;
+$(window).scroll(function(event){
+	if($(window).scrollTop() + $(window).height() > $(document).height() - 100){
+		var scrollTop = $(this).scrollTop();
+		if(scrollTop > lastScrollTop) {
+			Session.set('reportLimit', Session.get('reportLimit') + 10)
+		}
+		lastScrollTop = scrollTop;
+	}
+});
+
 Template.report.helpers({
 	report:function(){
-		return Report.find({ $and: [{ createdBy: Meteor.userId() }, { deleted: false }]});
+		return Report.find({ $and: [{ createdBy: Meteor.userId() }, 
+			{ deleted: false }]}, {sort: { createdOn: -1 }, limit: Session.get('reportLimit')});
 	}
 });
 
 Template.report_deleted.helpers({
 	report:function () {
-		return Report.find({ $and: [{ createdBy: Meteor.userId() }, { deleted: true }]});
+		return Report.find({ $and: [{ createdBy: Meteor.userId() }, { deleted: true }]}, {sort: { createdOn: 1 }});
 	}
 });
 
