@@ -9,11 +9,13 @@ Template.mainLayout.onCreated(function() {
 		$(".dropdown-button").dropdown({
 			belowOrigin: true,
 		});
-	}, 1000 );
+	}, 1500 );
 });
 
 Template.nav.onCreated(function() {
-	$(".button-collapse").sideNav({
-		closeOnClick: true
-	});
+	setTimeout(function(){
+		$(".button-collapse").sideNav({
+			closeOnClick: true
+		});
+	}, 1500 );
 });
