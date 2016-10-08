@@ -100,25 +100,23 @@
 </template>
 
 <template name="report_search">
-    <form id="report-search">
-        <div class="input-field col s12 m3">
-            <input id="name" name="name" type="text">
-            <label class="active" for="name">Cliente</label>
-        </div>
-        <div class="input-field col s12 m3">
+    <div class="input-field col s12 m4">
+        <input id="name" name="name" type="text">
+        <label class="active" for="name">Cliente</label>
+    </div>
+    <div class="input-field col s12 m3">
         <input id="date" type="date" class="datepicker">
-            <label class="active" for="date">Data</label>
-        </div>
-        <div class="input-field col s12 m3">
-            <select id="category" name="category">
-                {{> category_items}}
-            </select>
-            <label>Categoria</label>
-        </div>
-        <div class="input-field col s12 m3 center-align">
-            <button id="btn-submit" class="btn waves-effect" type="submit">Pesquisar</button>
-        </div>
-    </form> 
+        <label class="active" for="date">Data</label>
+    </div>
+    <div class="input-field col s10 m4">
+        <select id="category" name="category">
+            {{> category_items}}
+        </select>
+        <label>Categoria</label>
+    </div>
+    <div class="input-field col s2 m1 center-align">
+        <button id="clear" class="btn-floating btn-large waves-effect tooltipped" data-tooltip="Limpar pesquisa"><i class="large material-icons">clear_all</i></button>
+    </div>
 </template>
 
 <template name="report_options">

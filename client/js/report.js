@@ -11,32 +11,36 @@ $(window).scroll(function(event){
 });
 
 Template.report.onRendered(function(){
+
+	$('.datepicker').pickadate({
+		labelMonthNext: 'Próximo mês',
+		labelMonthPrev: 'Mês anterior',
+		labelMonthSelect: 'Selecione um mês',
+		labelYearSelect: 'Selecione um ano',
+		monthsFull: [ 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro' ],
+		monthsShort: [ 'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez' ],
+		weekdaysFull: [ 'Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado' ],
+		weekdaysShort: [ 'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb' ],
+		weekdaysLetter: [ 'D', 'S', 'T', 'Q', 'Q', 'S', 'S' ],
+		today: 'Hoje',
+		clear: 'Limpar',
+		close: 'Fechar',
+		format: 'dd/mm/yyyy',
+		closeOnSelect: true,
+		onSet: function (ele) {
+			if(ele.select){
+				this.close();
+			}
+		}
+	});
+
 	setTimeout(function(){
 		$('select').material_select();
-
-		$('.datepicker').pickadate({
-			labelMonthNext: 'Próximo mês',
-			labelMonthPrev: 'Mês anterior',
-			labelMonthSelect: 'Selecione um mês',
-			labelYearSelect: 'Selecione um ano',
-			monthsFull: [ 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro' ],
-			monthsShort: [ 'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez' ],
-			weekdaysFull: [ 'Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado' ],
-			weekdaysShort: [ 'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb' ],
-			weekdaysLetter: [ 'D', 'S', 'T', 'Q', 'Q', 'S', 'S' ],
-			today: 'Hoje',
-			clear: 'Limpar',
-			close: 'Fechar',
-			format: 'dd/mm/yyyy',
-			closeOnSelect: true
-		});
-
 	}, 1500 );
 
 	Session.set('nameSearch', '');
 	Session.set('dateSearch', '');
 	Session.set('categorySearch', '');
-
 });
 
 Template.new_report.onRendered(function(){
@@ -120,18 +124,29 @@ Template.report.events({
 });
 
 Template.report_search.events({
-	'submit #report-search':function(e, t){
-		e.preventDefault();
-
-		var name = t.find('#name').value,
-		datetime = t.find('#date').value,
-		category = t.find('#category').value;
-
+	'keyup #name': _.throttle(function(e) {
+		var name = $(e.target).val().trim();
+		console.log('name', name);
 		Session.set('nameSearch', name);
-		Session.set('dateSearch', datetime);
+	}, 200),
+	'change #date': _.throttle(function(e) {
+		var date = $(e.target).val().trim();
+		console.log('date', date);
+		Session.set('dateSearch', date);
+	}, 200),
+	'change #category': _.throttle(function(e) {
+		var category = $(e.target).val().trim();
+		console.log('category', category);
 		Session.set('categorySearch', category);
-
-		return false;
+	}, 200),
+	'click #clear': function(){
+		Session.set('nameSearch', '');
+		Session.set('dateSearch', '');
+		Session.set('categorySearch', '');
+		$('#name').val('');
+		$('#date').val('');
+		$('#category').val('');
+		$('#category').material_select();
 	}
 });
 
