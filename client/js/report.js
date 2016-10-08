@@ -13,19 +13,19 @@ $(window).scroll(function(event){
 Template.new_report.onRendered(function(){
 	setTimeout(function(){
 		$('select').material_select();
-	}, 500 );
+	}, 2000 );
 });
 
 Template.edit_report.onRendered(function(){
 	setTimeout(function(){
 		$('select').material_select();
-	}, 500 );
+	}, 2000 );
 });
 
 Template.view_report.onRendered(function(){
 	setTimeout(function(){
 		$('select').material_select();
-	}, 500 );
+	}, 2000 );
 });
 
 Template.report.helpers({
