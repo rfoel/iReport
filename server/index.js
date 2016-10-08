@@ -3,7 +3,7 @@ Meteor.publish('category', function() {
 });
 
 Meteor.publish('report', function() {
-	return Report.find({});
+	return Report.find();
 });
 
 Meteor.methods({

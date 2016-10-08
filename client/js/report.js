@@ -10,6 +10,30 @@ $(window).scroll(function(event){
 	}
 });
 
+Template.report.onRendered(function(){
+	setTimeout(function(){
+		$('select').material_select();
+
+		$('.datepicker').pickadate({
+			labelMonthNext: 'Próximo mês',
+			labelMonthPrev: 'Mês anterior',
+			labelMonthSelect: 'Selecione um mês',
+			labelYearSelect: 'Selecione um ano',
+			monthsFull: [ 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro' ],
+			monthsShort: [ 'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez' ],
+			weekdaysFull: [ 'Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado' ],
+			weekdaysShort: [ 'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb' ],
+			weekdaysLetter: [ 'D', 'S', 'T', 'Q', 'Q', 'S', 'S' ],
+			today: 'Hoje',
+			clear: 'Limpar',
+			close: 'Fechar',
+			format: 'dd/mm/yyyy',
+			closeOnSelect: true
+		});
+
+	}, 2000 );
+});
+
 Template.new_report.onRendered(function(){
 	setTimeout(function(){
 		$('select').material_select();
@@ -30,8 +54,8 @@ Template.view_report.onRendered(function(){
 
 Template.report.helpers({
 	report:function(){
-		return Report.find({ $and: [{ createdBy: Meteor.userId() }, 
-			{ deleted: false }]}, {sort: { createdOn: -1 }, limit: Session.get('reportLimit')});
+		return Report.find({ $and: [{ createdBy: Meteor.userId() }, { deleted: false }]},
+			{sort: { createdOn: -1 }, limit: Session.get('reportLimit')});
 	}
 });
 
@@ -55,19 +79,6 @@ Template.report_deleted.events({
 			});
 		}
 		return false;
-	}
-});
-
-Template.report.events({
-	"click #delete":function(e){
-		e.preventDefault();
-		Meteor.call('report.softRemove', this._id, function(err) {
-			if(err){
-				Materialize.toast(err, 4000, 'pink accent-3');
-			}else{
-				Materialize.toast('O relatório foi enviado para relatórios deletados', 4000, 'green accent-4');
-			}
-		});
 	},
 	"click #restore":function(event){
 		Meteor.call('report.restore', this._id, function(err) {
@@ -77,7 +88,39 @@ Template.report.events({
 				Materialize.toast('O relatório foi restaurado!', 4000, 'green accent-4');
 			}
 		});
-	},
+	}
+});
+
+Template.report.events({
+	"click #delete":function(e){
+		e.preventDefault();
+		console.log(this._id);
+		Meteor.call('report.softRemove', this._id, function(err) {
+			if(err){
+				Materialize.toast(err, 4000, 'pink accent-3');
+			}else{
+				Materialize.toast('O relatório foi enviado para relatórios deletados', 4000, 'green accent-4');
+			}
+		});
+	}
+});
+
+Template.report_search.events({
+	'submit #report-search':function(e, t){
+		e.preventDefault();
+
+		var name = t.find('#name').value,
+		datetime = t.find('#date').value,
+		category = t.find('#category').value;
+
+		console.log(name, datetime, category);
+
+		Session.set('nameSearch', name);
+		Session.set('dateSearch', date);
+		Session.set('categorySearch', category);
+
+		return false;
+	}
 });
 
 Template.report_options.events({
