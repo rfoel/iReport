@@ -1,8 +1,8 @@
 import { Session } from 'meteor/session'
 
 Template.mainLayout.onCreated(function() {
-	Meteor.subscribe('category');
-	Meteor.subscribe('report');
+	Meteor.subscribe('category.user');
+	Meteor.subscribe('report.user');
 
 	setTimeout(function(){
 		$('.tooltipped').tooltip({ delay: 50 });
@@ -16,5 +16,4 @@ Template.nav.onCreated(function() {
 	$(".button-collapse").sideNav({
 		closeOnClick: true
 	});
-
 });

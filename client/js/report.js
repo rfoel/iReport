@@ -31,7 +31,12 @@ Template.report.onRendered(function(){
 			closeOnSelect: true
 		});
 
-	}, 2000 );
+	}, 1500 );
+
+	Session.set('nameSearch', '');
+	Session.set('dateSearch', '');
+	Session.set('categorySearch', '');
+
 });
 
 Template.new_report.onRendered(function(){
@@ -52,17 +57,26 @@ Template.view_report.onRendered(function(){
 	}, 2000 );
 });
 
+function buildRegExp(searchText) {
+	var parts = searchText.trim().split(/[ \-\:]+/);
+	return new RegExp("(" + parts.join('|') + ")", "ig");
+};
+
 Template.report.helpers({
 	report:function(){
-		return Report.find({ $and: [{ createdBy: Meteor.userId() }, { deleted: false }]},
-			{sort: { createdOn: -1 }, limit: Session.get('reportLimit')});
+		var name = Session.get('nameSearch');
+		var date = Session.get('dateSearch');
+		var category = Session.get('categorySearch');
+		var name = buildRegExp(name);
+		var date = buildRegExp(date);
+		var category = buildRegExp(category);
+		return Report.find({deleted: false, name: name, datetime: date, category:category}, {sort: { createdOn: -1 }, limit: Session.get('reportLimit')});
 	}
 });
 
 Template.report_deleted.helpers({
 	report:function(){
-		return Report.find({ $and: [{ createdBy: Meteor.userId() }, 
-			{ deleted: true }]}, {sort: { createdOn: -1 }, limit: Session.get('reportLimit')});
+		return Report.find({deleted: true}, {sort: { createdOn: -1 }, limit: Session.get('reportLimit')});
 	}
 });
 
@@ -113,10 +127,8 @@ Template.report_search.events({
 		datetime = t.find('#date').value,
 		category = t.find('#category').value;
 
-		console.log(name, datetime, category);
-
 		Session.set('nameSearch', name);
-		Session.set('dateSearch', date);
+		Session.set('dateSearch', datetime);
 		Session.set('categorySearch', category);
 
 		return false;

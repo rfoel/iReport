@@ -1,9 +1,9 @@
-Meteor.publish('category', function() {
-	return Category.find();
+Meteor.publish('category.user', function() {
+	return Category.find({createdBy: this.userId});
 });
 
-Meteor.publish('report', function() {
-	return Report.find();
+Meteor.publish('report.user', function() {
+	return Report.find({createdBy: this.userId});
 });
 
 Meteor.methods({
