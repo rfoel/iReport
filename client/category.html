@@ -1,16 +1,23 @@
 <template name="category">
-    <nav class="z-depth-0 transparent black-text">
-        <div class="nav-wrapper">
-            <div class="col s12">
-                <a href="/" class="breadcrumb">Home</a>
-                <a href="/category" class="breadcrumb">Categorias</a>
-            </div>
+    <div class="row">
+        <div class="col s10">
+            <nav class="z-depth-0 transparent black-text">
+                <div class="nav-wrapper">
+                    <div class="col s12">
+                        <a href="/" class="breadcrumb"><span class="material-icons hide-on-med-and-up">home</span><span class="hide-on-small-only">Home</span></a>
+                        <a href="/category" class="breadcrumb"><span class="material-icons hide-on-med-and-up">settings</span><span class="hide-on-small-only">Categorias</span></a>
+                    </div>
+                </div>
+            </nav>
         </div>
-    </nav>
+        <div class="col s2">
+            {{> category_options}}
+        </div>
+    </div>  
+
     <div class="col s12">
         <div class="row">
             <h5 class="left">Categorias</h5>
-            {{> category_options}}
         </div>
         <div class="row">
             {{#if category.count}}
@@ -25,19 +32,25 @@
 </template>
 
 <template name="category_deleted">
-    <nav class="z-depth-0 transparent black-text">
-        <div class="nav-wrapper">
-            <div class="col s12">
-                <a href="/" class="breadcrumb">Home</a>
-                <a href="/category" class="breadcrumb">Categorias</a>
-                <a href="/category/deleted" class="breadcrumb">Categorias removidas</a>
-            </div>
+    <div class="row">
+        <div class="col s10">
+            <nav class="z-depth-0 transparent black-text">
+                <div class="nav-wrapper">
+                    <div class="col s12">
+                        <a href="/" class="breadcrumb"><span class="material-icons hide-on-med-and-up">home</span><span class="hide-on-small-only">Home</span></a>
+                        <a href="/category" class="breadcrumb"><span class="material-icons hide-on-med-and-up">settings</span><span class="hide-on-small-only">Categorias</span></a>
+                        <a href="/category/deleted" class="breadcrumb"><span class="material-icons hide-on-med-and-up">delete</span><span class="hide-on-small-only">Categorias removidas</span></a>
+                    </div>
+                </div>
+            </nav>
         </div>
-    </nav>
+        <div class="col s2">
+            {{> category_options}}
+        </div>
+    </div>  
     <div class="col s12">
         <div class="row">
             <h5 class="left">Categorias removidas</h5>
-            {{> category_options}}
         </div>
         <div class="row">
             {{#if category.count}}
@@ -84,17 +97,23 @@
 </template>
 
 <template name="new_category">
-    <nav class="z-depth-0 transparent black-text">
-        <div class="nav-wrapper">
-            <div class="col s12">
-                <a href="/" class="breadcrumb">Home</a>
-                <a href="/category" class="breadcrumb">Categorias</a>
-                <a href="/category/new" class="breadcrumb">Nova categoria</a>
-            </div>
-        </div>
-    </nav>
     <div class="row">
-        {{> category_options}}
+        <div class="col s10">
+            <nav class="z-depth-0 transparent black-text">
+                <div class="nav-wrapper">
+                    <div class="col s12">
+                        <a href="/" class="breadcrumb"><span class="material-icons hide-on-med-and-up">home</span><span class="hide-on-small-only">Home</span></a>
+                        <a href="/category" class="breadcrumb"><span class="material-icons hide-on-med-and-up">settings</span><span class="hide-on-small-only">Categorias</span></a>
+                        <a href="/category/new" class="breadcrumb"><span class="material-icons hide-on-med-and-up">add</span><span class="hide-on-small-only">Nova categoria</span></a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="col s2">
+            {{> category_options}}
+        </div>
+    </div>  
+    <div class="row">
         <div class="col s12 m6 offset-m3">
             <div class="row center-align">
                 <h5>Nova categoria</h5>
@@ -121,40 +140,46 @@
 </template>
 
 <template name="edit_category">
-    <nav class="z-depth-0 transparent black-text">
-        <div class="nav-wrapper">
-            <div class="col s12">
-                <a href="/" class="breadcrumb">Home</a>
-                <a href="/category" class="breadcrumb">Categorias</a>
-                <a href="/category/edit/{{category._id}}" class="breadcrumb">Editar categoria</a>
-            </div>
-        </div>
-    </nav>
     <div class="row">
+        <div class="col s10">
+            <nav class="z-depth-0 transparent black-text">
+                <div class="nav-wrapper">
+                    <div class="col s12">
+                      <a href="/" class="breadcrumb"><span class="material-icons hide-on-med-and-up">home</span><span class="hide-on-small-only">Home</span></a>
+                      <a href="/category" class="breadcrumb"><span class="material-icons hide-on-med-and-up">settings</span><span class="hide-on-small-only">Categorias</span></a>
+                      <a href="/category/edit/{{category._id}}" class="breadcrumb"><span class="material-icons hide-on-med-and-up">edit</span><span class="hide-on-small-only">Editar categoria</span></a>
+                  </div>
+              </div>
+          </nav>
+      </div>
+      <div class="col s2">
         {{> category_options}}
-        <div class="col s12 m6 offset-m3">
-            <div class="row center-align">
-                <h5>Editar categoria</h5>
-            </div>
-            <form id="edit-category">
-                <div class="row left-align">                  
-                    <div class="input-field col s12">
-                        <input id="title" name="title" type="text" value="{{category.title}}">
-                        <label class="active" for="title">Título</label>
-                    </div>
-                </div>
-                <div class="row left-align">
-                    <div class="input-field col s12">
-                        <textarea id="model" name="model" class="materialize-textarea">{{category.model}}</textarea>
-                        <label class="active" for="model">Modelo</label>
-                    </div>
-                </div>
-                <div class="row center-align">
-                    <button id="btn-submit" class="btn waves-effect" type="submit">Editar</button>
-                </div>
-            </form> 
-        </div>
     </div>
+</div>  
+<div class="row">
+    <div class="col s12 m6 offset-m3">
+        <div class="row center-align">
+            <h5>Editar categoria</h5>
+        </div>
+        <form id="edit-category">
+            <div class="row left-align">                  
+                <div class="input-field col s12">
+                    <input id="title" name="title" type="text" value="{{category.title}}">
+                    <label class="active" for="title">Título</label>
+                </div>
+            </div>
+            <div class="row left-align">
+                <div class="input-field col s12">
+                    <textarea id="model" name="model" class="materialize-textarea">{{category.model}}</textarea>
+                    <label class="active" for="model">Modelo</label>
+                </div>
+            </div>
+            <div class="row center-align">
+                <button id="btn-submit" class="btn waves-effect" type="submit">Editar</button>
+            </div>
+        </form> 
+    </div>
+</div>
 </template>
 
 <template name="category_options">

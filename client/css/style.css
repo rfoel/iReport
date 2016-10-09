@@ -58,11 +58,11 @@ nav li.active a {
 	color: #333 !important;
 }
 
-@media (max-width: 600px) {
-	.breadcrumb:not(:first-child):not(:last-child) {
-		display: none;
-	}
+.breadcrumb .material-icons {
+	margin-top: 15px;
+}
 
+@media (max-width: 600px) {
 	.options {
 		top: 30px;
 	}

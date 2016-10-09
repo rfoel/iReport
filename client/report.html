@@ -4,8 +4,8 @@
             <nav class="z-depth-0 transparent black-text">
                 <div class="nav-wrapper">
                     <div class="col s8">
-                        <a href="/" class="breadcrumb">Home</a>
-                        <a href="/report" class="breadcrumb">Relatórios</a>
+                        <a href="/" class="breadcrumb"><span class="material-icons hide-on-med-and-up">home</span><span class="hide-on-small-only">Home</span></a>
+                        <a href="/report" class="breadcrumb"><span class="material-icons hide-on-med-and-up">description</span><span class="hide-on-small-only">Relatórios</span></a>
                     </div>
                 </div>
             </nav>
@@ -54,9 +54,9 @@
             <nav class="z-depth-0 transparent black-text">
                 <div class="nav-wrapper">
                     <div class="col s12">
-                        <a href="/" class="breadcrumb">Home</a>
-                        <a href="/report" class="breadcrumb">Relatórios</a>
-                        <a href="/report/deleted" class="breadcrumb">Relatórios removidos</a>
+                        <a href="/" class="breadcrumb"><span class="material-icons hide-on-med-and-up">home</span><span class="hide-on-small-only">Home</span></a>
+                        <a href="/report" class="breadcrumb"><span class="material-icons hide-on-med-and-up">description</span><span class="hide-on-small-only">Relatórios</span></a>
+                        <a href="/report/deleted" class="breadcrumb"><span class="material-icons hide-on-med-and-up">delete</span><span class="hide-on-small-only">Relatórios removidos</span></a>
                     </div>
                 </div>
             </nav>
@@ -72,7 +72,7 @@
             <div class="chip"><i class="material-icons">visibility</i>Visualizar</div>
             <div class="chip"><i class="material-icons">edit</i>Editar</div>
             <div class="chip"><i class="material-icons">restore_page</i>Restaurar</div>
-            <div class="chip"><i class="material-icons">delete</i>Apagar</div>
+            <div class="chip"><i class="material-icons">delete_forever</i>Apagar</div>
         </div>
     </div>
     <table class="highlight bordered">
@@ -107,8 +107,10 @@
             <i id="edit" class="material-icons">edit</i>
             {{#if checkRoute}}
             <i id="restore" class="material-icons">restore_page</i>
-            {{/if}}
+            <i id="delete" class="material-icons">delete_forever</i>
+            {{else}}
             <i id="delete" class="material-icons">delete</i>
+            {{/if}}
         </td>
     </tr>
 </template>
@@ -140,7 +142,7 @@
             <ul>
                 <li><a id="report" href="/report" class="btn-floating tooltipped light-blue darken-4" data-tooltip="Visualizar relatórios"><i class="material-icons">reorder</i></a></li>
                 <li><a id="deleted" href="/report/deleted" class="btn-floating tooltipped pink accent-3" data-tooltip="Visualizar relatórios deletados"><i class="material-icons">delete</i></a></li>
-                <li><a id="add" href="/report/new" class="btn-floating tooltipped green accent-4" data-tooltip="Criar novo relatório"><i class="material-icons">add</i></a></li>
+                <li><a id="add" href="/report/new" class="btn-floating tooltipped green accent-4" data-tooltip="Criar novo relatório"><i class="material-icons">note_add</i></a></li>
             </ul>
         </div>
     </div>
@@ -152,9 +154,9 @@
             <nav class="z-depth-0 transparent black-text">
                 <div class="nav-wrapper">
                     <div class="col s12">
-                        <a href="/" class="breadcrumb">Home</a>
-                        <a href="/report" class="breadcrumb">Relatórios</a>
-                        <a href="/report/new" class="breadcrumb">Novo relatório</a>
+                        <a href="/" class="breadcrumb"><span class="material-icons hide-on-med-and-up">home</span><span class="hide-on-small-only">Home</span></a>
+                        <a href="/report" class="breadcrumb"><span class="material-icons hide-on-med-and-up">description</span><span class="hide-on-small-only">Relatórios</span></a>
+                        <a href="/report/new" class="breadcrumb"><span class="material-icons hide-on-med-and-up">note_add</span><span class="hide-on-small-only">Novo relatório</span></a>
                     </div>
                 </div>
             </nav>
@@ -218,9 +220,9 @@
             <nav class="z-depth-0 transparent black-text">
                 <div class="nav-wrapper">
                     <div class="col s12">
-                        <a href="/" class="breadcrumb">Home</a>
-                        <a href="/report" class="breadcrumb">Relatórios</a>
-                        <a href="/report/edit/{{report._id}}" class="breadcrumb">Editar relatório</a>
+                        <a href="/" class="breadcrumb"><span class="material-icons hide-on-med-and-up">home</span><span class="hide-on-small-only">Home</span></a>
+                        <a href="/report" class="breadcrumb"><span class="material-icons hide-on-med-and-up">description</span><span class="hide-on-small-only">Relatórios</span></a>
+                        <a href="/report/edit/{{report._id}}" class="breadcrumb"><span class="material-icons hide-on-med-and-up">edit</span><span class="hide-on-small-only">Editar relatório</span></a>
                     </div>
                 </div>
             </nav>
@@ -283,9 +285,9 @@
             <nav class="z-depth-0 transparent black-text">
                 <div class="nav-wrapper">
                     <div class="col s12">
-                        <a href="/" class="breadcrumb">Home</a>
-                        <a href="/report" class="breadcrumb">Relatórios</a>
-                        <a href="/report/edit/{{report._id}}" class="breadcrumb">Visualizar relatório</a>
+                        <a href="/" class="breadcrumb"><span class="material-icons hide-on-med-and-up">home</span><span class="hide-on-small-only">Home</span></a>
+                        <a href="/report" class="breadcrumb"><span class="material-icons hide-on-med-and-up">description</span><span class="hide-on-small-only">Relatórios</span></a>
+                        <a href="/report/edit/{{report._id}}" class="breadcrumb"><span class="material-icons hide-on-med-and-up">visibility</span><span class="hide-on-small-only">Visualizar relatório</span></a>
                     </div>
                 </div>
             </nav>
