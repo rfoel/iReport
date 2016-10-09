@@ -63,7 +63,7 @@ Template.view_report.onRendered(function(){
 
 function buildRegExp(searchText) {
 	var parts = searchText.trim().split(/[ \-\:]+/);
-	return new RegExp("(" + parts.join('|') + ")", "ig");
+	return new RegExp("(" + parts.join(' ') + ")", "ig");
 };
 
 Template.report.helpers({

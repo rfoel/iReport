@@ -1,5 +1,3 @@
-import { Session } from 'meteor/session'
-
 Template.mainLayout.onCreated(function() {
 	Meteor.subscribe('category.user');
 	Meteor.subscribe('report.user');
@@ -9,13 +7,8 @@ Template.mainLayout.onCreated(function() {
 		$(".dropdown-button").dropdown({
 			belowOrigin: true,
 		});
-	}, 1500 );
-});
-
-Template.nav.onCreated(function() {
-	setTimeout(function(){
 		$(".button-collapse").sideNav({
 			closeOnClick: true
-		});
+		});		
 	}, 1500 );
 });
