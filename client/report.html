@@ -1,13 +1,20 @@
 <template name="report">
-    <nav class="z-depth-0 transparent black-text">
-        <div class="nav-wrapper">
-            <div class="col s12">
-                <a href="/" class="breadcrumb">Home</a>
-                <a href="/report" class="breadcrumb">Relatórios</a>
-            </div>
+    <div class="row">
+        <div class="col s10">
+            <nav class="z-depth-0 transparent black-text">
+                <div class="nav-wrapper">
+                    <div class="col s8">
+                        <a href="/" class="breadcrumb">Home</a>
+                        <a href="/report" class="breadcrumb">Relatórios</a>
+                    </div>
+                </div>
+            </nav>
         </div>
-    </nav>
-    {{> report_options}}
+        <div class="col s2">
+            {{> report_options}}
+        </div>
+    </div>    
+
     <div class="row">
         <h5 class="left">Relatórios</h5>
         <div class="right">
@@ -42,22 +49,29 @@
 </template>
 
 <template name="report_deleted">
-    <nav class="z-depth-0 transparent black-text">
-        <div class="nav-wrapper">
-            <div class="col s12">
-                <a href="/" class="breadcrumb">Home</a>
-                <a href="/report" class="breadcrumb">Relatórios</a>
-                <a href="/report/deleted" class="breadcrumb">Relatórios removidos</a>
-            </div>
+    <div class="row">
+        <div class="col s8">
+            <nav class="z-depth-0 transparent black-text">
+                <div class="nav-wrapper">
+                    <div class="col s12">
+                        <a href="/" class="breadcrumb">Home</a>
+                        <a href="/report" class="breadcrumb">Relatórios</a>
+                        <a href="/report/deleted" class="breadcrumb">Relatórios removidos</a>
+                    </div>
+                </div>
+            </nav>
         </div>
-    </nav>
-    {{> report_options}}
+        <div class="col s4">
+            {{> report_options}}
+        </div>
+    </div>  
+
     <div class="row">
         <h5 class="left">Relatórios removidos</h5>
         <div class="right">
             <div class="chip"><i class="material-icons">visibility</i>Visualizar</div>
             <div class="chip"><i class="material-icons">edit</i>Editar</div>
-            <div class="chip"><i class="material-icons">restore</i>Restaurar</div>
+            <div class="chip"><i class="material-icons">restore_page</i>Restaurar</div>
             <div class="chip"><i class="material-icons">delete</i>Apagar</div>
         </div>
     </div>
@@ -92,7 +106,7 @@
             <i id="view" class="material-icons">visibility</i>
             <i id="edit" class="material-icons">edit</i>
             {{#if checkRoute}}
-            <i id="restore" class="material-icons">restore</i>
+            <i id="restore" class="material-icons">restore_page</i>
             {{/if}}
             <i id="delete" class="material-icons">delete</i>
         </td>
@@ -100,49 +114,55 @@
 </template>
 
 <template name="report_search">
-    <div class="input-field col s12 m4">
+    <div class="input-field col s12 m3 l4">
         <input id="name" name="name" type="text">
         <label class="active" for="name">Cliente</label>
     </div>
-    <div class="input-field col s12 m3">
+    <div class="input-field col s12 m3 l3">
         <input id="date" type="date" class="datepicker">
         <label class="active" for="date">Data</label>
     </div>
-    <div class="input-field col s10 m4">
+    <div class="input-field col s9 m4 l4">
         <select id="category" name="category">
             {{> category_items}}
         </select>
         <label>Categoria</label>
     </div>
-    <div class="input-field col s2 m1 center-align">
+    <div class="input-field col s3 m2 l1 right-align">
         <button id="clear" class="btn-floating btn-large waves-effect tooltipped" data-tooltip="Limpar pesquisa"><i class="large material-icons">clear_all</i></button>
     </div>
 </template>
 
 <template name="report_options">
     <div class="option">
-        <div class="fixed-action-btn horizontal click-to-toggle" style="position: absolute; display: inline-block;">
+        <div class="fixed-action-btn horizontal click-to-toggle right">
             <a class="btn-floating btn-large waves-effect"><i class="large material-icons">description</i></a>
             <ul>
                 <li><a id="report" href="/report" class="btn-floating tooltipped light-blue darken-4" data-tooltip="Visualizar relatórios"><i class="material-icons">reorder</i></a></li>
-                <li><a id="deleted" href="/report/deleted" class="btn-floating tooltipped red" data-tooltip="Visualizar relatórios deletados"><i class="material-icons">delete</i></a></li>
-                <li><a id="add" href="/report/new" class="btn-floating tooltipped green" data-tooltip="Criar novo relatório"><i class="material-icons">add</i></a></li>
+                <li><a id="deleted" href="/report/deleted" class="btn-floating tooltipped pink accent-3" data-tooltip="Visualizar relatórios deletados"><i class="material-icons">delete</i></a></li>
+                <li><a id="add" href="/report/new" class="btn-floating tooltipped green accent-4" data-tooltip="Criar novo relatório"><i class="material-icons">add</i></a></li>
             </ul>
         </div>
     </div>
 </template>
 
 <template name="new_report">
-    <nav class="z-depth-0 transparent black-text">
-        <div class="nav-wrapper">
-            <div class="col s12">
-                <a href="/" class="breadcrumb">Home</a>
-                <a href="/report" class="breadcrumb">Relatórios</a>
-                <a href="/report/new" class="breadcrumb">Novo relatório</a>
-            </div>
+    <div class="row">
+        <div class="col s8">
+            <nav class="z-depth-0 transparent black-text">
+                <div class="nav-wrapper">
+                    <div class="col s12">
+                        <a href="/" class="breadcrumb">Home</a>
+                        <a href="/report" class="breadcrumb">Relatórios</a>
+                        <a href="/report/new" class="breadcrumb">Novo relatório</a>
+                    </div>
+                </div>
+            </nav>
         </div>
-    </nav>
-    {{> report_options}}
+        <div class="col s4">
+            {{> report_options}}
+        </div>
+    </div>  
     <div class="col s12 m12">
         <div class="row">
             <h5>Novo relatório</h5>
@@ -193,16 +213,22 @@
 </template>
 
 <template name="edit_report">
-    <nav class="z-depth-0 transparent black-text">
-        <div class="nav-wrapper">
-            <div class="col s12">
-                <a href="/" class="breadcrumb">Home</a>
-                <a href="/report" class="breadcrumb">Relatórios</a>
-                <a href="/report/edit/{{report._id}}" class="breadcrumb">Editar relatório</a>
-            </div>
+    <div class="row">
+        <div class="col s8">
+            <nav class="z-depth-0 transparent black-text">
+                <div class="nav-wrapper">
+                    <div class="col s12">
+                        <a href="/" class="breadcrumb">Home</a>
+                        <a href="/report" class="breadcrumb">Relatórios</a>
+                        <a href="/report/edit/{{report._id}}" class="breadcrumb">Editar relatório</a>
+                    </div>
+                </div>
+            </nav>
         </div>
-    </nav>
-    {{> report_options}}
+        <div class="col s4">
+            {{> report_options}}
+        </div>
+    </div>  
     <div class="col s12 m12">
         <div class="row">
             <h5>Editar relatório</h5>
@@ -252,16 +278,22 @@
 </template>
 
 <template name="view_report">
-    <nav class="z-depth-0 transparent black-text">
-        <div class="nav-wrapper">
-            <div class="col s12">
-                <a href="/" class="breadcrumb">Home</a>
-                <a href="/report" class="breadcrumb">Relatórios</a>
-                <a href="/report/edit/{{report._id}}" class="breadcrumb">Visualizar relatório</a>
-            </div>
+    <div class="row">
+        <div class="col s8">
+            <nav class="z-depth-0 transparent black-text">
+                <div class="nav-wrapper">
+                    <div class="col s12">
+                        <a href="/" class="breadcrumb">Home</a>
+                        <a href="/report" class="breadcrumb">Relatórios</a>
+                        <a href="/report/edit/{{report._id}}" class="breadcrumb">Visualizar relatório</a>
+                    </div>
+                </div>
+            </nav>
         </div>
-    </nav>
-    {{> report_options}}
+        <div class="col s4">
+            {{> report_options}}
+        </div>
+    </div>  
     <div class="col s12 m12">
         <div class="row">
             <h5>Visualizar relatório</h5>

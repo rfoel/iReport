@@ -1,3 +1,7 @@
+html {
+	overflow-x: hidden;
+}
+
 body {
 	display: flex;
 	min-height: 100vh;
@@ -59,11 +63,6 @@ nav li.active a {
 		display: none;
 	}
 
-	.option {
-		position: relative;  
-		margin-top: 5px;
-	}
-
 	.options {
 		top: 30px;
 	}
@@ -82,15 +81,15 @@ nav li.active a {
 }
 
 #edit:hover, #edit:focus {
-	color: #01579b;
-}
-
-#restore:hover, #restore:focus {
 	color: #00c853;
 }
 
+#restore:hover, #restore:focus {
+	color: #0d47a1;
+}
+
 #view:hover, #view:focus {
-	color: #64b5f6;
+	color: #0d47a1;
 }
 
 footer .page-footer {
@@ -105,9 +104,14 @@ footer .page-footer {
 
 .option {
 	position: relative;  
-	top: 18px;
 }
 
+.option > .fixed-action-btn {
+	position: relative;  
+	display: inline-block;
+	top: 4px !important;
+	right: 0 !important;	
+}
 
 .options {
 	margin-left: 5px; 
@@ -123,8 +127,8 @@ footer .page-footer {
 }
 
 .chip i.material-icons {
-    cursor: default !important;
-    float: left !important;
-    padding-left: 0 !important;
-    margin-right: 6px !important;
+	cursor: default !important;
+	float: left !important;
+	padding-left: 0 !important;
+	margin-right: 6px !important;
 }
