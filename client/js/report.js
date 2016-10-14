@@ -11,7 +11,6 @@ $(window).scroll(function(event){
 });
 
 Template.report.onRendered(function(){
-
 	$('.datepicker').pickadate({
 		labelMonthNext: 'Próximo mês',
 		labelMonthPrev: 'Mês anterior',
@@ -31,6 +30,9 @@ Template.report.onRendered(function(){
 			if(ele.select){
 				this.close();
 			}
+		},
+		onClose: function() {
+			$('.datepicker').blur();
 		}
 	});
 
@@ -38,6 +40,7 @@ Template.report.onRendered(function(){
 		$('select').material_select();
 	}, 1500 );
 
+	Session.set('descriptionSearch', '');
 	Session.set('nameSearch', '');
 	Session.set('dateSearch', '');
 	Session.set('categorySearch', '');
@@ -68,13 +71,15 @@ function buildRegExp(searchText) {
 
 Template.report.helpers({
 	report:function(){
+		var description = Session.get('descriptionSearch');
 		var name = Session.get('nameSearch');
 		var date = Session.get('dateSearch');
 		var category = Session.get('categorySearch');
+		var description = buildRegExp(description);
 		var name = buildRegExp(name);
 		var date = buildRegExp(date);
 		var category = buildRegExp(category);
-		return Report.find({deleted: false, name: name, datetime: date, category:category}, {sort: { createdOn: -1 }, limit: Session.get('reportLimit')});
+		return Report.find({deleted: false, description: description, name: name, datetime: date, category:category}, {sort: { createdOn: -1 }, limit: Session.get('reportLimit')});
 	}
 });
 
@@ -124,25 +129,28 @@ Template.report.events({
 });
 
 Template.report_search.events({
+	'keyup #description': _.throttle(function(e) {
+		var description = $(e.target).val().trim();
+		Session.set('descriptionSearch', description);
+	}, 200),
 	'keyup #name': _.throttle(function(e) {
 		var name = $(e.target).val().trim();
-		console.log('name', name);
 		Session.set('nameSearch', name);
 	}, 200),
 	'change #date': _.throttle(function(e) {
 		var date = $(e.target).val().trim();
-		console.log('date', date);
 		Session.set('dateSearch', date);
 	}, 200),
 	'change #category': _.throttle(function(e) {
 		var category = $(e.target).val().trim();
-		console.log('category', category);
 		Session.set('categorySearch', category);
 	}, 200),
 	'click #clear': function(){
+		Session.set('descriptionSearch', '');
 		Session.set('nameSearch', '');
 		Session.set('dateSearch', '');
 		Session.set('categorySearch', '');
+		$('#description').val('');
 		$('#name').val('');
 		$('#date').val('');
 		$('#category').val('');
@@ -406,14 +414,14 @@ Template.view_report.events({
 			}
 		});
 
-		clipboard.on('success', function(e) {
+		// clipboard.on('success', function(e) {
 			Materialize.toast('Copiado com sucesso!', 4000, 'green accent-4');
-			e.clearSelection();
-		});
+			// e.clearSelection();
+		// });
 
-		clipboard.on('error', function(e) {
-			Materialize.toast('Ocorreu um erro :(', 4000, 'pink accent-3');
-		});
+		// clipboard.on('error', function(e) {
+			// Materialize.toast('Ocorreu um erro :(', 4000, 'pink accent-3');
+		// });
 	},
 	"click #withDateAndUser":function(e, t){
 		e.preventDefault();
@@ -427,13 +435,13 @@ Template.view_report.events({
 			}
 		});
 
-		clipboard.on('success', function(e) {
+		// clipboard.on('success', function(e) {
 			Materialize.toast('Copiado com sucesso!', 4000, 'green accent-4');
-			e.clearSelection();
-		});
+			// e.clearSelection();
+		// });
 
-		clipboard.on('error', function(e) {
-			Materialize.toast('Ocorreu um erro :(', 4000, 'pink accent-3');
-		});
+		// clipboard.on('error', function(e) {
+			// Materialize.toast('Ocorreu um erro :(', 4000, 'pink accent-3');
+		// });
 	}
 });
